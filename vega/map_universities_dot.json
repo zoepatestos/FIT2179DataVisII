@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot map of Australian art venues. active_type param is top-level so both dot layers can read it.",
+  "width": "container",
+  "height": 520,
+  "background": "#c9c9c9",
+  "projection": { "type": "mercator" },
+  "params": [
+    { "name": "active_type", "value": "all" }
+  ],
+  "layer": [
+
+    {
+      "data": {
+        "url": "../js/ne_10m_admin_1_states_provinces_australia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#3e3c39",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 1
+      }
+    },
+
+    {
+      "data": { "url": "../data/australian_universities_coordinates.csv" },
+      "transform": [
+        { "calculate": "'University'", "as": "venue_type" }
+      ],
+      "mark": { "type": "circle", "size": 35 },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "color": {
+          "field": "venue_type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["University"],
+            "range":  ["#eb1745"]
+          },
+          "legend": null
+        },
+        "opacity": {
+          "condition": {
+            "test": "active_type == 'all' || datum.venue_type == active_type",
+            "value": 0.8
+          },
+          "value": 0.06
+        },
+        "tooltip": [
+          { "field": "name",  "type": "nominal", "title": "Gallery" },
+          { "field": "state",  "type": "nominal", "title": "State"    }        ]
+      }
+    }
+
+  ],
+  "config": { "view": { "stroke": null } }
+}

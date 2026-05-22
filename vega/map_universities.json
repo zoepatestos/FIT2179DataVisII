@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot map of Australian universities. Clicking a dot fires the uni_select point-selection, which JS bridges to the enrolments bar chart.",
+  "width": "container",
+  "height": 360,
+  "background": "#c9c9c9",
+  "projection": { "type": "mercator" },
+  "layer": [
+    {
+      "data": {
+        "url": "js/ne_10m_admin_1_states_provinces_australia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#3e3c39",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": { "url": "data/university_locations.csv" },
+      "params": [
+        {
+          "name": "uni_select",
+          "select": { "type": "point", "fields": ["institution"], "toggle": false },
+          "value": []
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 90,
+        "stroke": "#0a0a0a",
+        "strokeWidth": 0.6,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "color": {
+          "condition": { "param": "uni_select", "empty": true, "value": "#2cdada" },
+          "value": "#f2e44a"
+        },
+        "size": {
+          "condition": { "param": "uni_select", "empty": true, "value": 90 },
+          "value": 220
+        },
+        "tooltip": [
+          { "field": "institution", "type": "nominal", "title": "University" },
+          { "field": "state",       "type": "nominal", "title": "State" }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": { "stroke": null }
+  }
+}

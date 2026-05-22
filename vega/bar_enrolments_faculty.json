@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Horizontal bar chart of university enrolments by field of education (faculty). Reactive to year_selection (year as string; 'All' = sum across 2020-2024) and selected_university (institution name; 'All' = sum across all universities). Both signals are set externally from HTML.",
+  "width": "container",
+  "height": 360,
+  "background": "transparent",
+  "data": { "url": "data/university_enrolments_long.csv" },
+  "params": [
+    { "name": "year_selection",      "value": "All" },
+    { "name": "selected_university", "value": "All" }
+  ],
+  "transform": [
+    {
+      "filter": "year_selection == 'All' || datum.year == toNumber(year_selection)"
+    },
+    {
+      "filter": "selected_university == 'All' || datum.institution == selected_university"
+    },
+    {
+      "aggregate": [{"op": "sum", "field": "enrolments", "as": "total"}],
+      "groupby": ["faculty"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "y": {
+      "field": "faculty",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": { "labelLimit": 240, "labelFontSize": 11 }
+    },
+    "x": {
+      "field": "total",
+      "type": "quantitative",
+      "title": "Students enrolled",
+      "axis": {
+        "labelExpr": "replace(format(datum.value, '~s'), 'k', 'K')",
+        "labelFontSize": 10
+      }
+    },
+    "color": {
+      "condition": {
+        "test": "datum.faculty === 'Creative Arts'",
+        "value": "#f58ed6"
+      },
+      "value": "#857d82"
+    },
+    "tooltip": [
+      { "field": "faculty", "type": "nominal",      "title": "Field of study" },
+      { "field": "total",   "type": "quantitative", "title": "Enrolments", "format": "," }
+    ]
+  },
+  "config": {
+    "view":  { "stroke": null },
+    "axis":  { "gridColor": "rgba(255,255,255,0.06)", "domainColor": "#5a5753", "tickColor": "#5a5753", "labelColor": "#3e3c39", "titleColor": "#3e3c39" },
+    "font":  "Host Grotesk, Helvetica, sans-serif"
+  }
+}

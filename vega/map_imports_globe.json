@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Globe choropleth showing each country's share of Australia's art material imports, by year and category. Params controlled externally via HTML sliders/buttons wired with view.signal().",
+  "width": 600,
+  "height": 600,
+  "background": null,
+  "params": [
+    { "name": "category_selection", "value": "Paints"    },
+    { "name": "view_angle",         "value": "Australia" },
+    { "name": "year_selection",     "value": 2024        }
+  ],
+  "projection": {
+    "type": "orthographic",
+    "rotate": {
+      "expr": "view_angle === 'Australia' ? [-133, 25, 0] : view_angle === 'Europe' ? [-10, -45, 0] : [95, -20, 0]"
+    },
+    "scale": 280
+  },
+  "layer": [
+    {
+      "description": "Ocean sphere",
+      "data": {"sphere": true},
+      "mark": {
+        "type": "geoshape",
+        "fill": "#3e3c39",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "description": "Graticule grid lines",
+      "data": {"graticule": {"step": [30, 30]}},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.4,
+        "fill": null
+      }
+    },
+    {
+      "description": "Base: all countries in neutral tone — shows through for no-data countries",
+      "data": {
+        "url": "js/ne_110m_admin_0_countries.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#6b6762",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.4
+      }
+    },
+    {
+      "description": "Countries coloured by their share of Australia's total imports for the selected category and year",
+      "data": {
+        "url": "js/ne_110m_admin_0_countries.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.ISO_A3 + '_' + year_selection + '_' + category_selection",
+          "as": "lookup_key"
+        },
+        {
+          "lookup": "lookup_key",
+          "from": {
+            "data": {"url": "data/imports_by_country_year.csv"},
+            "key": "iso3_year_cat",
+            "fields": ["value_usd", "country", "year", "category"]
+          }
+        },
+        {
+          "filter": "datum.value_usd != null && datum.value_usd > 0"
+        },
+        {
+          "joinaggregate": [{"op": "sum", "field": "value_usd", "as": "total_imports"}],
+          "groupby": []
+        },
+        {
+          "calculate": "datum.value_usd / datum.total_imports",
+          "as": "share_of_imports"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.4
+      },
+      "encoding": {
+        "color": {
+          "field": "share_of_imports",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "scheme": "purples"
+          },
+          "legend": {
+            "title": ["Share of Australia's", "imports (year & category)"],
+            "orient": "bottom-left",
+            "format": ".1%"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.NAME",  "type": "nominal",      "title": "Country"},
+          {"field": "value_usd",        "type": "quantitative", "title": "Import value (USD)",  "format": "$,.0f"},
+          {"field": "share_of_imports", "type": "quantitative", "title": "Share of imports",    "format": ".1%"},
+          {"field": "year",             "type": "ordinal",      "title": "Year"},
+          {"field": "category",         "type": "nominal",      "title": "Category"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Helvetica, Arial, sans-serif"
+  }
+}

@@ -1,0 +1,16 @@
+anzsco_code,occupation,occupation_official,employed,median_weekly_aud,annual_salary_aud,salary_source
+211111,Actor,Actors,1500,1692,87984,"parent ANZSCO 2111 (Actors, Dancers and Other Entertainers)"
+211112,Dancer / Choreographer,Dancers and Choreographers,980,1692,87984,"parent ANZSCO 2111 (Actors, Dancers and Other Entertainers)"
+211213,Musician,Musicians,4900,1766,91832,parent ANZSCO 2112 (Music Professionals)
+211214,Singer,Singers,590,1766,91832,parent ANZSCO 2112 (Music Professionals)
+211311,Photographer,Photographers,14200,1840,95680,ANZSCO 2113 (Photographers)
+211411,Painter,Painters (Visual Arts),2800,2081,108212,parent ANZSCO 2114 (Visual Arts and Crafts Professionals)
+211412,Sculptor,Potters and Ceramic Artists,890,2081,108212,parent ANZSCO 2114 (Visual Arts and Crafts Professionals)
+212111,Artistic Director,Artistic Directors,360,2179,113308,"parent ANZSCO 2121 (Artistic Directors, Media Producers and Presenters)"
+212312,Film / TV Director,"Directors (Film, Television, Radio or Stage)",2400,1975,102700,"parent ANZSCO 2123 (Film, Television, Radio and Stage Directors)"
+212413,Producer,Print Journalists,2800,1722,89544,parent ANZSCO 2124 (Journalists and Other Writers)
+212411,Journalist,Copywriters,3000,1722,89544,parent ANZSCO 2124 (Journalists and Other Writers)
+232411,Graphic Designer,Graphic Designers,27500,1850,96200,"parent ANZSCO 2324 (Graphic and Web Designers, and Illustrators)"
+232412,Illustrator,Illustrators (including Animators),3400,1850,96200,"parent ANZSCO 2324 (Graphic and Web Designers, and Illustrators)"
+232511,Interior Designer,Interior Designers,19300,1692,87984,ANZSCO 2325 (Interior Designers)
+232311,Fashion Designer,Fashion Designers,3700,,,

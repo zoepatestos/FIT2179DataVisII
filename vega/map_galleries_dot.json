@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dot map of Australian art venues. active_type param is top-level so both dot layers can read it.",
+  "width": "container",
+  "height": 520,
+  "background": "#c9c9c9",
+  "projection": { "type": "mercator" },
+  "params": [
+    { "name": "active_type", "value": "all" }
+  ],
+  "layer": [
+
+    {
+      "data": {
+        "url": "../js/ne_10m_admin_1_states_provinces_australia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#3e3c39",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 1
+      }
+    },
+
+    {
+      "data": { "url": "../data/artguide_galleries.csv" },
+      "transform": [
+        { "calculate": "'Art Gallery'", "as": "venue_type" },
+        { "filter": "active_type == 'all' || active_type == 'Art Gallery'" }
+      ],
+      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#eb1745" },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "tooltip": [
+          { "field": "name", "type": "nominal", "title": "Gallery" },
+          { "field": "city", "type": "nominal", "title": "City"    }
+        ]
+      }
+    },
+
+    {
+      "data": { "url": "../data/eventfinda_theatres.csv" },
+      "transform": [
+        { "calculate": "'Theatre'", "as": "venue_type" },
+        { "filter": "active_type == 'all' || active_type == 'Theatre'" }
+      ],
+      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#3bf5eb" },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "tooltip": [
+          { "field": "name", "type": "nominal", "title": "Theatre" },
+          { "field": "city", "type": "nominal", "title": "City"    }
+        ]
+      }
+    }
+
+  ],
+  "config": { "view": { "stroke": null } }
+}

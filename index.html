@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Australia Beyond the Canvas</title>
+
+  <!-- Pure.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+
+  <!-- Host Grotesk only — KyivType Sans loaded locally via @font-face -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400&display=swap" rel="stylesheet" />
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       HERO
+  ═════════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Australia Beyond the Canvas</h1>
+      <p class="hero-sub">From gallery walls to grand concert halls.</p>
+      <p class="hero-sub">A three-act data portrait of where Australia's love for the arts lives, who pursues it as a career, and what keeps it going.</p>
+
+      <nav class="hero-nav">
+        <a href="#act1">
+          <span class="nav-num">I</span>
+          <img src="images/museum.png" width="80" alt="Venues icon" class="nav-icon" />
+          <span class="nav-label">Places</span>
+        </a>
+        <a href="#act2">
+          <span class="nav-num">II</span>
+          <img src="images/family.png" width="80" alt="People icon" class="nav-icon" />     
+          <span class="nav-label">People</span>
+        </a>
+        <a href="#act3">
+          <span class="nav-num">III</span>
+          <img src="images/money.png" width="80" alt="Money icon" class="nav-icon" />
+          <span class="nav-label">Money</span>
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  
+  <p class="hero-credit">
+    <em>Native honeysuckle </em> &nbsp;·&nbsp; <strong> Margaret Preston </strong> &nbsp;·&nbsp; 1933
+  </p>
+
+  <!-- ════════════════════════════════════════════
+       ACT I — VENUES & SPACES
+  ═════════════════════════════════════════════ -->
+  <section class="act act--dark" id="act1">
+    <div class="act-inner">
+
+      <header class="act-header">
+        <p class="act-eyebrow">Act I</p>
+        <div class="act-rule"></div>
+        <div class="act-contents">
+          <h2>Venues and Spaces</h2>
+          <p class="act-intro">
+           Before we ask who makes art or what it costs, we ask where it lives. Which walls hold it, which stages host it, which postcodes get to see it up close.
+          </p>
+          <!-- CHART 1 — Dot map of gallery + theatre locations -->
+          <div class="chart-block chart-block--hero">
+            <div class="chart-label">Chart 1</div>
+            <h3 class="chart-title">Art gallery &amp; theatre locations across Australia</h3>
+            <p class="chart-caption">
+             A thick seam runs down the eastern seaboard. The interior is almost empty. For most Australians, art lives within a short drive; for a sizeable minority, it lives a flight away.
+            <div class="map-with-legend">
+              <div id="map-galleries" class="vega-chart vega-chart--l"></div>
+              <aside class="custom-map-legend" id="map-legend">
+                <p class="legend-label">Filter</p>
+                <button class="legend-item" data-type="Art Gallery" title="Art Galleries">
+                  <img src="images/artist.png" width ="100" alt="Art Gallery icon" />
+                  <span>Art Galleries</span>
+                </button>
+                <button class="legend-item" data-type="Theatre" title="Theatres">
+                  <img src="images/cinema.png" width="100" alt="Theatre icon" />
+                  <span>Theatres</span>
+                </button>
+              </aside>
+            </div>
+          </div>
+
+         
+        </div>
+      </header>
+
+    </div>
+  </section> 
+
+
+  <!-- ════════════════════════════════════════════
+       ACT II — PEOPLE
+  ═════════════════════════════════════════════ -->
+  <section class="act act--cream" id="act2">
+    <div class="act-inner">
+
+      <header class="act-header">
+        <p class="act-eyebrow">Act II</p>
+        <div class="act-rule"></div>
+        <h2>Education and Occupations</h2>
+        <p class="act-intro">
+         Infrastructure on its own does not make a creative industry. People do. This act follows them from the field they enrol in, to the university they pick, to the work they take up once they leave.
+        </p>
+      </header>
+
+      <div class="chart-grid chart-grid--2col">
+
+        <!-- Chart 2 — Enrolments bar chart, reactive to chart 3 + year buttons -->
+        <div class="chart-block">
+            <div class="chart-label chart-label--light">Chart 2</div>
+            <h3 class="chart-title">Enrolments by Field of Study</h3>
+            <p class="chart-caption">
+            Creative Arts sits well below the headline disciplines. Society and Culture, Management, and Health draw far larger cohorts year after year. Some specialist schools tell a very different story to the national one.
+            </p>
+
+            <!-- Horizontal year slider + All-years button -->
+            <div class="year-slider-h-row" id="enrol-year-control">
+              <span class="year-tick-h">2020</span>
+              <input type="range"
+                     id="enrol-year-slider"
+                     class="year-slider-h"
+                     min="2020" max="2024" step="1" value="2024" />
+              <span class="year-tick-h">2024</span>
+              <output class="year-h-out" id="enrol-year-output">2024</output>
+              <button class="year-btn year-btn--active" id="enrol-year-all" type="button">All years</button>
+            </div>
+
+            <!-- Active university filter pill -->
+            <div class="filter-pill" id="enrol-uni-filter" hidden>
+              Showing: <strong id="enrol-uni-label"></strong>
+              <button id="enrol-uni-clear" type="button" aria-label="Clear">&times;</button>
+            </div>
+
+            <div id="bar-enrolments-faculty" class="vega-chart vega-chart--md"></div>
+            
+        </div>
+
+        <!-- Chart 3 — Universities map (clickable). Light #c9c9c9 frame to match the map's own background. -->
+        <div class="chart-block">
+          <div class="chart-frame chart-frame--mute">
+            <div class="chart-label">Chart 3</div>
+            <h3 class="chart-title">Universities Across Australia</h3>
+            <p class="chart-caption">
+             Forty-three universities, scattered with the same eastern bias as the galleries.
+            </p>
+            <div id="map-universities" class="vega-chart vega-chart--md"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Chart 4 — Creative occupations: two-lollipop redesign -->
+      <div class="chart-block">
+          <div class="chart-label chart-label--light">Charts 4 and 5 </div>
+          <h3 class="chart-title">From study to wage — the creative workforce</h3>
+          <p class="chart-caption">
+          Following enrolments out into the workforce, two questions remain. How many people actually do each of these jobs, and what does the job pay?
+The answers do not line up. Graphic Designer, Interior Designer, and Photographer dominate by headcount, but their pay sits near the middle of the pack. The best-paid roles, Artistic Director and the visual arts professions, employ only a few hundred people each. A creative career splits early: the common roles are steady but modest, the lucrative ones are rare and senior.
+          </p>
+          <p class="chart-caption" style="font-size: 0.75rem; font-style: italic; opacity: 0.8;">
+            Employment count and salary deviation are shown as different chart types because they answer different questions — one about scale, the other about relative pay.
+          </p>
+          <div id="bar-occupations" class="vega-chart vega-chart--lg"></div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════
+       ACT III — MONEY
+  ═════════════════════════════════════════════ -->
+  <section class="act act--dark" id="act3">
+    <div class="act-inner">
+
+      <header class="act-header">
+        <p class="act-eyebrow">Act III</p>
+        <div class="act-rule"></div>
+        <h2>Funding and Spending</h2>
+        <p class="act-intro">
+         Behind every painting on a gallery wall and every set on a theatre stage is a supply chain. Having seen where art happens and who makes it, the closing act traces what keeps it running: the paints, pencils, clay, stone, and textiles that Australia buys from abroad to keep its studios open.
+        </p>
+      </header>
+
+      <div class="chart-block chart-block--hero">
+          <div class="chart-label">Chart 6</div>
+          <h3 class="chart-title">Global sources of Australia's art material imports, 2014–2025</h3>
+          <p class="chart-caption">
+           Different materials, different maps. Chinese paints, Italian clay and stone, New Zealand drawing supplies, textiles spread across Asia. Dominance shifts year to year.
+          </p>
+          <div class="map-with-legend">
+            <div id="imports_globe" class="vega-chart"></div>
+
+            <!-- Column 2: year slider -->
+            <aside class="year-slider-aside">
+              <p class="legend-label">Year</p>
+              <output class="year-display" id="year-display">2024</output>
+              <div class="year-slider-track">
+                <span class="year-tick">2025</span>
+                <input type="range"
+                       id="year-slider"
+                       class="year-slider"
+                       min="2014" max="2025" step="1" value="2024" />
+                <span class="year-tick">2014</span>
+              </div>
+              <button class="year-all-btn" id="globe-all-years" type="button">All years</button>
+            </aside>
+
+            <!-- Column 3: centre-view buttons -->
+            <aside class="custom-map-legend" id="viewangle-legend">
+              <p class="legend-label">Centre view</p>
+              <button class="legend-item legend-item--text legend-active" data-angle="Australia" title="Centre on Australia">
+                <span>Australia</span>
+              </button>
+              <button class="legend-item legend-item--text" data-angle="Europe" title="Centre on Europe">
+                <span>Europe</span>
+              </button>
+              <button class="legend-item legend-item--text" data-angle="Americas" title="Centre on the Americas">
+                <span>Americas</span>
+              </button>
+            </aside>
+
+            <!-- Column 3: category buttons -->
+            <aside class="custom-map-legend" id="imports-legend">
+              <p class="legend-label">Category</p>
+              <button class="legend-item legend-active" data-category="Paints" title="Paints">
+                <img src="images/paint.png" alt="Paints icon" />
+                <span>Paints</span>
+              </button>
+              <button class="legend-item" data-category="Drawing supplies" title="Drawing supplies">
+                <img src="images/draw.png" alt="Drawing supplies icon" />
+                <span>Drawing</span>
+              </button>
+              <button class="legend-item" data-category="Clay, stone &amp; tools" title="Clay, stone &amp; tools">
+                <img src="images/sculpt.png" alt="Clay, stone &amp; tools icon" />
+                <span>Clay &amp; Stone</span>
+              </button>
+              <button class="legend-item" data-category="Textiles" title="Textiles">
+                <img src="images/sew.png" alt="Textiles icon" />
+                <span>Textiles</span>
+              </button>
+              <button class="legend-item legend-item--text legend-all" data-category="All" title="All categories" type="button">
+                <span>All categories</span>
+              </button>
+            </aside>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <div class="chart-grid chart-grid--2col">
+        <div class="chart-block">
+          <div class="chart-frame">
+            <div class="chart-label">Chart 8</div>
+            <h3 class="chart-title">Government arts funding over time</h3>
+            <p class="chart-caption">
+              Creative Australia grant funding, adjusted for inflation.
+              Periods of austerity are visible.
+            </p>
+            <div id="line-funding" class="vega-chart vega-chart--sm"></div>
+            <p class="data-source">
+              Source: <a href="https://creative.gov.au" target="_blank">Creative Australia</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="chart-block">
+          <div class="chart-frame">
+            <div class="chart-label">Chart 9</div>
+            <h3 class="chart-title">Ticket revenue by art form</h3>
+            <p class="chart-caption">
+              Which art forms Australians actually spend money attending — live
+              music, theatre, opera, galleries, and more.
+            </p>
+            <div id="bar-ticket-revenue" class="vega-chart vega-chart--sm"></div>
+            <p class="data-source">Source: Creative Australia; ABS</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-block chart-block--hero">
+        <div class="chart-label">Chart 10</div>
+        <h3 class="chart-title">Art supplies Australia imports — and from where</h3>
+        <p class="chart-caption">
+          Australia imports the vast majority of its art supplies. Stacked bars
+          show total import value by commodity over time.
+        </p>
+        <div id="bar-import-commodity" class="vega-chart vega-chart--lg"></div>
+        <p class="data-source">
+          Source: <a href="https://comtradeplus.un.org/" target="_blank">UN Comtrade Plus</a>
+          (HS 3213 — Artists' paints; HS 9609 — Pencils &amp; pastels)
+        </p>
+      </div> -->
+
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
