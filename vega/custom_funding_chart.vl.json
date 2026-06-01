@@ -6,7 +6,7 @@
   "autosize": { "type": "pad", "resize": true },
 
   "signals": [
-    { "name": "cols",     "value": 5 },
+    { "name": "cols",     "value": 6 },
     { "name": "boxW",     "value": 70 },
     { "name": "boxH",     "value": 70 },
     { "name": "changeW",  "value": 9 },

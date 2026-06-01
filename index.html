@@ -112,13 +112,54 @@
 
         </div>
 
+        <p class="act-intro">
+          Raw numbers follow population. The great concentrations of venues along the
+          eastern seaboard reflect, more than anything, where most Australians live.
+          But cultural access is not just about how many venues exist; it is about how
+          evenly they are spread. Ask instead how many galleries serve each 100,000
+          residents, and the picture reshuffles entirely.
+        </p>
+
         <!-- Chart 3 — Galleries per 100,000 residents, small multiples -->
         <div class="chart-block chart-block--hero">
           <div class="chart-label">Chart 3</div>
           <h3 class="chart-title">Galleries per 100,000 residents, by state</h3>
+          <div class="grid-container">
+        
+
+
+            <div class="column">    
+            <p class="chart-caption">
+              <img src="images/excellent.png" width="50" alt="Excellent" /> <strong>First place: ACT.</strong> No surprise that Australia's national capital
+              leads the ranking. Home to the <span style = "font-size: 15px; background-color: #9d11bd74;" >National Gallery of Australia </span> and the <span style = "font-size: 15px; background-color: #9d11bd74;" >National Portrait Gallery</span>, the ACT fits a remarkable density of major collecting institutions
+              into a territory of <em>under </em> <span style="font-size: 20px;">500,000</span> residents.
+            </p>
+            </div>
+
+          
+            <div class="column">
+            <p class="chart-caption">
+              <img src="images/great-job.png" width="50" alt="Great job" /> <strong>Second place: Victoria.</strong> Melbourne has long worn the badge of
+              Australia's cultural capital, and the numbers back it up. Victoria's gallery network
+              runs deep, from the iconic <span style = "font-size: 15px; background-color: #9d11bd74;" >National Gallery of Victoria</span> to a rich layer of commercial and community spaces
+              spread across the state.
+            </p>
+            </div>
+
+            <div class="column">
+            <p class="chart-caption">
+              <img src="images/well-done.png" width="50" alt="Well done" /> <strong>Third place: Tasmania.</strong> Small in population, Tasmania punches well
+              above its weight. A long tradition of regional arts investment, capped by the
+              arrival of <span style = "font-size: 15px; background-color: #9d11bd74;" >MONA</span> in 2011, has given the island state a gallery culture that belies
+              its size.
+            </p>
+            </div>
+
+
+        </div>
           <p class="chart-caption">
-            Small states naturally rise on a per-capita measure, but the reordering against
-            Chart 1's raw count is the point.
+            Queensland and Western Australia sit at the other end of the scale: vast states
+            where gallery access remains almost entirely concentrated in capital cities.
           </p>
           <div id="bubble-per-capita" class="vega-chart"></div>
         </div>
@@ -245,7 +286,6 @@
 
       </div>
 
-
     </div>
   </section>
 
@@ -261,7 +301,11 @@
         <div class="act-rule"></div>
         <h2>Funding and Spending</h2>
         <p class="act-intro">
-         Behind every painting on a gallery wall and every set on a theatre stage is a supply chain. Having seen where art happens and who makes it, the closing act traces what keeps it running: the paints, pencils, clay, stone, and textiles that Australia buys from abroad to keep its studios open.
+          Individual dedication only carries a sector so far. The venues still need to
+          cover their costs, the studios still need their materials, and the practitioners
+          still need to be paid. The closing act follows the money: where Australia sources
+          the raw materials that fill its studios, how galleries and museums manage what
+          they earn, and how much the federal government has invested in keeping it all running.
         </p>
       </header>
 
@@ -269,7 +313,12 @@
           <div class="chart-label">Chart 8</div>
           <h3 class="chart-title">Global sources of Australia's art material imports, 2014–2025</h3>
           <p class="chart-caption">
-           Different materials, different maps. Chinese paints, Italian clay and stone, New Zealand drawing supplies, textiles spread across Asia. Dominance shifts year to year.
+           Australia's studios draw their raw materials from across the globe. Chinese
+           manufacturers supply the bulk of paints; Italian quarries provide the clay
+           and stone sculptors work with; drawing supplies flow largely from New Zealand;
+           and textiles for fibre artists arrive from South and Southeast Asia. No single
+           country dominates every category, and the sourcing landscape shifts from year
+           to year. What ends up on gallery walls begins thousands of kilometres away.
           </p>
           <div class="map-with-legend">
             <div id="imports_globe" class="vega-chart"></div>
@@ -338,13 +387,16 @@
           <div class="chart-label">Chart 9</div>
           <h3 class="chart-title">Revenue and profit of Australian art galleries &amp; museums</h3>
           <p class="chart-caption">
-            Total annual revenue stays remarkably stable around AUD&nbsp;$2–2.7&nbsp;billion across the 2013–2026 period.
-            What changes is <em>how</em> that revenue splits between operating costs (upper band, slate) and
-            profit (lower band, warm beige). The dark line is the profit threshold — everything above it is what
-            the industry spends to operate, everything below it is what it keeps. The 2017 inflection, when
-            profit margin jumped from 8.5% to 31.9%, marks a fundamental cost-cutting shift. Hover any year for
-            the exact split.
+            Revenue for Australian galleries and museums has held steady at $2 to $2.7 billion
+            since 2013. In 2017, profit margin jumped from 8.5% to 31.9%, not because the
+            industry grew, but because costs were cut. The institutions kept more while
+            the practitioners who fill them earned the same.
           </p>
+          <p class="chart-caption" style="font-size:10px;"><em>
+            The upper band shows operating costs; the lower band shows profit. The dark
+            threshold line separates what the industry spends from what it keeps.
+            Hover any year for the exact figures.
+          </em></p>
           <div id="area-revenue-profit" class="vega-chart vega-chart--md"></div>
         </div>
 
@@ -354,65 +406,36 @@
         <div class="chart-block">
           <div class="chart-label">Chart 10</div>
           <h3 class="chart-title">Government funding for heritage &amp; arts, 1999–2032</h3>
-          <p class="chart-caption">
-            One box per year, read left to right. Each box fills with green “paint” up to that
-            year's federal funding on a fixed 0–$15&nbsp;billion scale — the paint-pour marker
-            rides the surface, climbing as funding grows from $3.8&nbsp;B in 1999 to
-            $12.9&nbsp;B in 2032. The slim bar before each box shows the year-on-year change on a
-            0–15% scale: <strong style="color:#6c5ce7">blue</strong> when funding rose,
-            <strong style="color:#e23b3b">red</strong> when it fell (only 2016 dips).
+          <p class=”chart-caption”>
+            Federal funding for heritage and arts has grown almost without interruption
+            since 1999, rising from $3.8 billion to a projected $12.9 billion by 2032.
+            Only 2016 recorded a cut. Whatever else has changed across three decades,
+            governments have consistently chosen to spend more on culture.
           </p>
+          <p class=”chart-caption” style=”font-size:10px;”><em>
+            One box per year, read left to right. Each box fills to that year's funding
+            level on a 0 to $15 billion scale. The thin bar at the left shows the
+            year-on-year change: <strong style=”color:#6c5ce7”>blue</strong> when
+            funding rose, <strong style=”color:#e23b3b”>red</strong> when it fell.
+          </em></p>
           <div id="funding-paint" class="vega-chart"></div>
         </div>
 
-   
         </div>
+
+        <p class="act-intro" style="margin-top: 2.5rem;">
+          Three acts, one picture. Australia's arts sector is modest in scale but
+          consistent in character: venues concentrated along the coast and unequally
+          distributed per capita, practitioners who chose the work despite its wages,
+          institutions that have quietly grown more profitable, and a government that
+          has backed the sector with rising investment for over three decades.
+        </p>
+        <p class="act-intro">
+          It is not a glamorous economic story. But it is a durable one, and in
+          the arts, durability is its own kind of achievement.
+        </p>
 
       </div>
-
-      <!-- <div class="chart-grid chart-grid--2col">
-        <div class="chart-block">
-          <div class="chart-frame">
-            <div class="chart-label">Chart 8</div>
-            <h3 class="chart-title">Government arts funding over time</h3>
-            <p class="chart-caption">
-              Creative Australia grant funding, adjusted for inflation.
-              Periods of austerity are visible.
-            </p>
-            <div id="line-funding" class="vega-chart vega-chart--sm"></div>
-            <p class="data-source">
-              Source: <a href="https://creative.gov.au" target="_blank">Creative Australia</a>
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-block">
-          <div class="chart-frame">
-            <div class="chart-label">Chart 9</div>
-            <h3 class="chart-title">Ticket revenue by art form</h3>
-            <p class="chart-caption">
-              Which art forms Australians actually spend money attending — live
-              music, theatre, opera, galleries, and more.
-            </p>
-            <div id="bar-ticket-revenue" class="vega-chart vega-chart--sm"></div>
-            <p class="data-source">Source: Creative Australia; ABS</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="chart-block chart-block--hero">
-        <div class="chart-label">Chart 10</div>
-        <h3 class="chart-title">Art supplies Australia imports — and from where</h3>
-        <p class="chart-caption">
-          Australia imports the vast majority of its art supplies. Stacked bars
-          show total import value by commodity over time.
-        </p>
-        <div id="bar-import-commodity" class="vega-chart vega-chart--lg"></div>
-        <p class="data-source">
-          Source: <a href="https://comtradeplus.un.org/" target="_blank">UN Comtrade Plus</a>
-          (HS 3213 — Artists' paints; HS 9609 — Pencils &amp; pastels)
-        </p>
-      </div> -->
 
     </div>
   </section>

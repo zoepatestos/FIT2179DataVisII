@@ -453,7 +453,6 @@ a:hover { color: var(--c-accent-dk); }
   color: var(--c-dark-text);
   line-height: 1.7;
   margin: 0 0 1.25rem;
-  max-width: 680px;
 }
 
 .act--dark .chart-caption,
@@ -756,7 +755,19 @@ a:hover { color: var(--c-accent-dk); }
   background: rgba(81, 210, 195, 0.5);
 }
 
+/* Base setup for the 3-column grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  gap: 20px; /* Space between columns */
+  padding: 10px;
+}
 
+.column {
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 5px;
+}
 /* ═══════════════════════════════════════════════════════════
    VEGA CONTAINERS
 ═══════════════════════════════════════════════════════════ */
