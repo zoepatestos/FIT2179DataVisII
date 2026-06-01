@@ -1,0 +1,158 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Custom 'paint-filling' small-multiples of Australian government funding for heritage & arts. One box per year (chronological, wrapping into a grid). Each box is a grey track filled green from the bottom to the funding level on a 0-15 billion scale, with a paint-pour image sitting on the fill line. Between boxes, a thin bar encodes the year-on-year change on a 0-15% scale: blue when funding rose, red when it fell.",
+  "background": "transparent",
+  "padding": 10,
+  "autosize": { "type": "pad", "resize": true },
+
+  "signals": [
+    { "name": "cols",     "value": 5 },
+    { "name": "boxW",     "value": 70 },
+    { "name": "boxH",     "value": 70 },
+    { "name": "changeW",  "value": 9 },
+    { "name": "innerGap", "value": 5 },
+    { "name": "cellGap",  "value": 6 },
+    { "name": "rowGap",   "value": 28 },
+    { "name": "cellW",  "update": "changeW + innerGap + boxW + cellGap" },
+    { "name": "rowH",   "update": "boxH + rowGap" },
+    { "name": "width",  "update": "cols * cellW - cellGap" },
+    { "name": "height", "update": "max(rowH, ceil(length(data('funding')) / cols) * rowH)" }
+  ],
+
+  "data": [
+    {
+      "name": "funding",
+      "url": "data/funding_heritage_and_arts.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        { "type": "formula", "as": "year",      "expr": "toNumber(datum['Year '])" },
+        { "type": "formula", "as": "billions",  "expr": "toNumber(datum['$ billion '])" },
+        { "type": "formula", "as": "change",    "expr": "datum['Change (%)'] == 'N/A' ? null : toNumber(datum['Change (%)'])" },
+        { "type": "window", "ops": ["row_number"], "as": ["rn"], "sort": { "field": "year" } },
+        { "type": "formula", "as": "i",   "expr": "datum.rn - 1" },
+        { "type": "formula", "as": "col", "expr": "datum.i % cols" },
+        { "type": "formula", "as": "row", "expr": "floor(datum.i / cols)" },
+        { "type": "formula", "as": "cellX",     "expr": "datum.col * cellW" },
+        { "type": "formula", "as": "boxX",      "expr": "datum.cellX + changeW + innerGap" },
+        { "type": "formula", "as": "centerX",   "expr": "datum.boxX + boxW / 2" },
+        { "type": "formula", "as": "boxTop",    "expr": "datum.row * rowH" },
+        { "type": "formula", "as": "boxBottom", "expr": "datum.boxTop + boxH" },
+        { "type": "formula", "as": "fillFrac",  "expr": "min(1, max(0, datum.billions / 15))" },
+        { "type": "formula", "as": "fillTop",   "expr": "datum.boxBottom - datum.fillFrac * boxH" },
+        { "type": "formula", "as": "changeFrac","expr": "datum.change == null ? 0 : min(1, max(0, abs(datum.change) / 15))" },
+        { "type": "formula", "as": "changeTop", "expr": "datum.boxBottom - datum.changeFrac * boxH" },
+        { "type": "formula", "as": "changeColor","expr": "datum.change == null ? null : (datum.change < 0 ? '#e23b3b' : '#6c5ce7')" },
+        { "type": "formula", "as": "tip", "expr": "{'Year': datum.year, 'Funding (AUD Billion)': format(datum.billions, '.2f'), 'Change': datum.change == null ? 'N/A' : (datum.change + '%')}" }
+      ]
+    },
+    {
+      "name": "changes",
+      "source": "funding",
+      "transform": [ { "type": "filter", "expr": "datum.change != null" } ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "name": "boxBackground",
+      "from": { "data": "funding" },
+      "encode": {
+        "enter": {
+          "x":      { "field": "boxX" },
+          "width":  { "signal": "boxW" },
+          "y":      { "field": "boxTop" },
+          "height": { "signal": "boxH" },
+          "fill":   { "value": "#dcdcdc" },
+          "cornerRadius": { "value": 2 }
+        },
+        "update": { "tooltip": { "field": "tip" } }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "changeTrack",
+      "from": { "data": "changes" },
+      "encode": {
+        "enter": {
+          "x":      { "field": "cellX" },
+          "width":  { "signal": "changeW" },
+          "y":      { "field": "boxTop" },
+          "height": { "signal": "boxH" },
+          "fill":   { "value": "transparent" },
+          "cornerRadius": { "value": 1 }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "paintFill",
+      "from": { "data": "funding" },
+      "encode": {
+        "enter": {
+          "x":  { "field": "boxX" },
+          "width": { "signal": "boxW" },
+          "y":  { "field": "fillTop" },
+          "y2": { "field": "boxBottom" },
+          "fill": { "value": "#e14490" }
+        },
+        "update": { "tooltip": { "field": "tip" } }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "changeBar",
+      "from": { "data": "changes" },
+      "encode": {
+        "enter": {
+          "x":  { "field": "cellX" },
+          "width": { "signal": "changeW" },
+          "y":  { "field": "changeTop" },
+          "y2": { "field": "boxBottom" },
+          "fill": { "field": "changeColor" },
+          "cornerRadius": { "value": 1 }
+        },
+        "update": { "tooltip": { "field": "tip" } }
+      }
+    },
+    {
+      "type": "text",
+      "name": "yearLabel",
+      "from": { "data": "funding" },
+      "encode": {
+        "enter": {
+          "x":    { "field": "centerX" },
+          "y":    { "field": "boxBottom", "offset": -6 },
+          "text": { "field": "year" },
+          "align":    { "value": "center" },
+          "baseline": { "value": "bottom" },
+          "fill":     { "value": "#ffffff" },
+          "fontSize": { "value": 11 },
+          "fontWeight": { "value": 600 },
+          "font":     { "value": "Host Grotesk, Helvetica, sans-serif" }
+        }
+      }
+    },
+    {
+      "type": "image",
+      "name": "paintPour",
+      "from": { "data": "funding" },
+      "encode": {
+        "enter": {
+          "url":    { "value": "images/paint_spill.png" },
+          "x":      { "field": "centerX" },
+          "y":      { "field": "fillTop", "offset": 2 },
+          "width":  { "value": 28 },
+          "height": { "value": 28 },
+          "align":    { "value": "center" },
+          "baseline": { "value": "bottom" },
+          "aspect":   { "value": true }
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Host Grotesk, Helvetica, sans-serif"
+  }
+}

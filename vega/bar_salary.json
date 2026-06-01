@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Diverging bar chart of each creative occupation's average annual salary as a deviation from the mean salary across all roles with published figures (~AUD 96,230). Bars right of zero earn more than average; bars left earn less. Fashion Designer excluded — no published salary at any ANZSCO level.",
+  "background": "transparent",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/occupations_arts.csv",
+    "format": {
+      "type": "csv",
+      "parse": { "annual_salary_aud": "number" }
+    }
+  },
+  "transform": [
+    { "filter": "isValid(datum.annual_salary_aud) && datum.annual_salary_aud > 0" },
+    { "calculate": "datum.annual_salary_aud - 96230", "as": "salary_diff" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "bar", "size": 14 },
+      "encoding": {
+        "y": {
+          "field": "occupation",
+          "type": "nominal",
+          "sort": { "field": "salary_diff", "op": "max", "order": "descending" },
+          "title": null,
+          "axis": { "labelLimit": 220 }
+        },
+        "x": {
+          "field": "salary_diff",
+          "type": "quantitative",
+          "title": "Difference from the average (AUD)",
+          "scale": { "domain": [-20000, 20000] },
+          "axis": {
+            "labelExpr": "(datum.value < 0 ? '-$' : datum.value > 0 ? '+$' : '$') + replace(format(abs(datum.value), '~s'), 'k', 'K')"
+          }
+        },
+        "color": {
+          "condition": { "test": "datum.salary_diff > 0", "value": "#a86b52" },
+          "value": "#6b7a8f"
+        },
+        "tooltip": [
+          { "field": "occupation",        "type": "nominal" },
+          { "field": "annual_salary_aud", "type": "quantitative", "format": "$,.0f", "title": "Avg. annual salary (AUD)" },
+          { "field": "salary_diff",       "type": "quantitative", "format": "$,.0f", "title": "Difference from average" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "rule", "color": "#5a5753", "strokeWidth": 1 },
+      "encoding": { "x": { "datum": 0 } }
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "domainColor": "#5a5753",
+      "tickColor":   "#5a5753",
+      "labelColor":  "#3e3c39",
+      "titleColor":  "#3e3c39",
+      "gridColor":   "rgba(0,0,0,0.06)",
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "grid": true
+    },
+    "font": "Host Grotesk, Helvetica, sans-serif"
+  }
+}

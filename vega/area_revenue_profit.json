@@ -1,0 +1,131 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Annual revenue of Australia's art galleries and museums, 2013-2026, decomposed into operating profit (lower zone) and expenditure (upper zone). The dark line where the two zones meet is the profit threshold: revenue * profit_margin = profit. Above the line is what the industry spends to operate; below the line is what it keeps.",
+  "background": "transparent",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "data/R8910 Art Galleries & Museums in Australia - Revenue.csv"
+  },
+  "transform": [
+    { "calculate": "toNumber(datum.Category)", "as": "year" },
+    { "filter": "datum.year >= 2013 && datum.year <= 2026" },
+    {
+      "lookup": "Category",
+      "from": {
+        "data": { "url": "data/R8910 Art Galleries & Museums in Australia - Profit.csv" },
+        "key":  "Category",
+        "fields": ["Profit Margin"]
+      }
+    },
+    { "calculate": "toNumber(datum['Annual Revenue ($bn)'])", "as": "revenue_bn" },
+    { "calculate": "toNumber(datum['Profit Margin'])",        "as": "profit_margin_pct" },
+    { "filter": "isValid(datum.profit_margin_pct)" },
+    { "calculate": "datum.revenue_bn * datum.profit_margin_pct / 100", "as": "profit_bn" },
+    { "calculate": "datum.revenue_bn - datum.profit_bn",              "as": "expenditure_bn" },
+    { "fold": ["profit_bn", "expenditure_bn"], "as": ["zone", "value_bn"] },
+    { "calculate": "datum.zone === 'profit_bn' ? 0 : 1", "as": "zone_order" }
+  ],
+  "layer": [
+      {
+      "description": "Stacked area: profit (bottom) + expenditure (top)",
+      "mark": { "type": "area", "interpolate": "monotone" },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0 
+          }
+        },
+        "y": {
+          "field": "value_bn",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "Annual revenue (AUD billions)",
+          "axis": {
+            "labelExpr": "'$' + format(datum.value, '.1f') + 'B'"
+          }
+        },
+        "color": {
+          "field": "zone",
+          "type": "nominal",
+          "scale": {
+            "domain": ["profit_bn", "expenditure_bn"],
+            "range":  ["#d2f0d1",   "#78746d"]
+          },
+          "legend": null
+        },
+        "order": { "field": "zone_order", "type": "quantitative" },
+        "tooltip": [
+          { "field": "year",              "type": "ordinal",      "title": "Year" },
+          { "field": "revenue_bn",        "type": "quantitative", "title": "Revenue (AUD bn)",     "format": ".2f" },
+          { "field": "profit_margin_pct", "type": "quantitative", "title": "Profit margin (%)",    "format": ".1f" },
+          { "field": "profit_bn",         "type": "quantitative", "title": "Profit (AUD bn)",      "format": ".2f" },
+          { "field": "expenditure_bn",    "type": "quantitative", "title": "Expenditure (AUD bn)", "format": ".2f" }
+        ]
+      }
+    },
+
+    {
+      "description": "Profit-threshold line drawn on top of the stack boundary",
+      "transform": [
+        { "filter": "datum.zone === 'profit_bn'" }
+      ],
+      "mark": { "type": "line", "color": "#363d3c", "strokeWidth": 1.5, "interpolate": "monotone", "strokeCap": "round", "strokeDash": [4,2] },
+      "encoding": {
+        "x": { "field": "year",     "type": "ordinal" },
+        "y": { "field": "value_bn", "type": "quantitative" }
+      }
+    },
+
+    {
+      "description": "Inline label anchored in the upper (expenditure) zone",
+      "data": { "values": [ { "year": 2018, "y": 1.45, "label": "Expenditure" } ] },
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": 700,
+        "color": "#363d3c",
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x":    { "field": "year",  "type": "ordinal" },
+        "y":    { "field": "y",     "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    },
+
+    {
+      "description": "Inline label anchored in the lower (profit) zone",
+      "data": { "values": [ { "year": 2018, "y": 0.32, "label": "Profit" } ] },
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": 700,
+        "color": "#363d3c",
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x":    { "field": "year",  "type": "ordinal" },
+        "y":    { "field": "y",     "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    }
+
+  ],
+  "config": {
+    "view":  { "stroke": null },
+    "axis":  {
+      "domainColor": "#5a5753",
+      "tickColor":   "#5a5753",
+      "labelColor":  "#363d3c",
+      "titleColor":  "#363d3c",
+      "gridColor":   "rgba(255,255,255,0.06)",
+      "labelFontSize": 10,
+      "titleFontSize": 11,
+      "grid": true
+    },
+    "font": "Host Grotesk, Helvetica, sans-serif"
+  }
+}

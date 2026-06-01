@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Horizontal bar chart of people currently employed in each of 15 creative occupations.",
+  "background": "transparent",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/occupations_arts.csv",
+    "format": {
+      "type": "csv",
+      "parse": { "employed": "number" }
+    }
+  },
+  "mark": {
+    "type": "bar",
+    "color": "transparent",
+    "size": 14
+  },
+  "encoding": {
+    "y": {
+      "field": "occupation",
+      "type": "nominal",
+      "sort": [
+        "Artistic Director",
+        "Paintor",
+        "Sculptor",
+        "Film / TV Director",
+        "Graphic Designer",
+        "Musician",
+        "Actor",
+        "Illustrator",
+        "Photographer",
+        "Musician",
+        "Singer",
+        "Producer",
+        "Journalist",
+        "Actor",
+        "Dancer / Choreographer",
+        "Interior Designer"
+      
+      ],
+      "title": null,
+      "axis": { "labelLimit": 220 }
+    },
+    "x": {
+      "field": "employed",
+      "type": "quantitative",
+      "title": "People currently employed",
+      "axis": { "labelExpr": "replace(format(datum.value, '~s'), 'k', 'K')" }
+    },
+    "tooltip": [
+      { "field": "occupation", "type": "nominal" },
+      { "field": "employed",   "type": "quantitative", "format": "," }
+    ]
+  },
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "domainColor": "#5a5753",
+      "tickColor":   "#5a5753",
+      "labelColor":  "#3e3c39",
+      "titleColor":  "#3e3c39",
+      "gridColor":   "rgba(0,0,0,0.06)",
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "grid": true
+    },
+    "font": "Host Grotesk, Helvetica, sans-serif"
+  }
+}

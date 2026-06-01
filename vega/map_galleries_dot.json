@@ -32,7 +32,7 @@
         { "calculate": "'Art Gallery'", "as": "venue_type" },
         { "filter": "active_type == 'all' || active_type == 'Art Gallery'" }
       ],
-      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#eb1745" },
+      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#9d11bd", "stroke": "#ccaed2", "strokeWidth": 0.8 },
       "encoding": {
         "longitude": { "field": "longitude", "type": "quantitative" },
         "latitude":  { "field": "latitude",  "type": "quantitative" },
@@ -49,7 +49,7 @@
         { "calculate": "'Theatre'", "as": "venue_type" },
         { "filter": "active_type == 'all' || active_type == 'Theatre'" }
       ],
-      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#3bf5eb" },
+      "mark": { "type": "circle", "size": 35, "opacity": 0.85, "color": "#51d2c3", "stroke": "#1e493a", "strokeWidth": 0.8 },
       "encoding": {
         "longitude": { "field": "longitude", "type": "quantitative" },
         "latitude":  { "field": "latitude",  "type": "quantitative" },

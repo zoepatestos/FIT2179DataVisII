@@ -180,9 +180,7 @@ a:hover { color: var(--c-accent-dk); }
   align-items: center;
   justify-content: center;
   /* margin: 32px; */
-  margin-top: 32px;
-  margin-left: 32px; 
-  margin-right: 32px;
+  margin-top: 32px;; 
   padding: 16px;
 }
 
@@ -292,7 +290,7 @@ a:hover { color: var(--c-accent-dk); }
   padding: 5rem var(--pad-h);
 }
 
-.act--cream { background: var(--c-cream); }
+.act--cream { background: var(--c-cream);}
 .act--dark  { background: var(--c-dark);  color: var(--c-dark-text); }
 
 .act-inner {
@@ -356,6 +354,18 @@ a:hover { color: var(--c-accent-dk); }
 
 .chart-grid--2col {
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  align-items: stretch;
+}
+
+/* Side-by-side pairs: text tops align, charts share one centre horizontal axis */
+.chart-grid--2col > .chart-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-grid--2col > .chart-block > .vega-chart {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 /* Full-width hero chart block */
@@ -367,14 +377,14 @@ a:hover { color: var(--c-accent-dk); }
 /* ─── Chart label ─────────────────────────────── */
 .chart-label {
   display: inline-block;
-  font-size: 0.62rem;
+  font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--c-muted);
   margin-bottom: 0.5rem;
 }
 
-.chart-label--light { color: var(--c-dark-muted); }
+.chart-label--light { color: var(--c-dark-chart); }
 
 /* ─── Chart card frame ───────────────────────── */
 .chart-frame {
@@ -417,8 +427,9 @@ a:hover { color: var(--c-accent-dk); }
 /* ─── Chart text ─────────────────────────────── */
 .chart-title {
   font-family: var(--f-display);
-  font-size: 1rem;
-  font-weight: 400;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1.3;
   margin-bottom: 0.4rem;
   color: var(--c-charcoal);
@@ -428,14 +439,18 @@ a:hover { color: var(--c-accent-dk); }
 .chart-frame--dark .chart-title { color: var(--c-dark-text); }
 
 .chart-block--hero .chart-title {
-  font-size: 1.15rem;
-  font-weight: 400;
-  margin-bottom: 0.45rem;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  color: var(--c-charcoal);
 }
 
 .chart-caption {
   font-size: 0.82rem;
-  color: var(--c-muted);
+  color: var(--c-dark-text);
   line-height: 1.7;
   margin: 0 0 1.25rem;
   max-width: 680px;
@@ -469,7 +484,7 @@ a:hover { color: var(--c-accent-dk); }
   display: flex;
   align-items: flex-start;
   gap: 3rem;
-  margin: 3rem;
+  margin: 0rem;
 }
 
 /* Chart fills remaining space */
@@ -481,7 +496,7 @@ a:hover { color: var(--c-accent-dk); }
 /* Legend column to the right */
 .custom-map-legend {
   flex-shrink: 0;
-  width: 130px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -504,7 +519,7 @@ a:hover { color: var(--c-accent-dk); }
   flex-direction: column;
   align-items: center;
   gap: 0.45rem;
-  width: 100%;
+  width: 70%;
   padding: 0.75rem 0.5rem;
   background: none;
   border: 1px solid transparent;
@@ -531,7 +546,7 @@ a:hover { color: var(--c-accent-dk); }
 
 .legend-item:hover {
   border-color: var(--c-rule);
-  background: rgba(0,0,0,0.03);
+  background: rgba(200, 27, 27, 0.03);
 }
 
 /* ── Horizontal year slider row (enrolments chart) ───────────── */
@@ -587,8 +602,6 @@ a:hover { color: var(--c-accent-dk); }
   padding: 0.3rem 0.55rem;
   margin-top: 0.6rem;
   cursor: pointer;
-  transition: background 0.18s, border-color 0.18s, color 0.18s;
-  border-radius: 2px;
   white-space: nowrap;
 }
 .year-all-btn:hover { background: rgba(44,218,218,0.12); border-color: var(--c-accent); }
@@ -731,9 +744,18 @@ a:hover { color: var(--c-accent-dk); }
 
 /* Active / selected state */
 .legend-item.legend-active {
-  border-color: var(--c-accent-dk);
-  background: rgba(44, 218, 218, 0.08);
+  background: rgba(255, 253, 247, 0.5);
 }
+
+/* Active / selected state */
+.legend-item.legend-gallery {
+  background: rgba(157, 17, 189, 0.5);
+}
+
+.legend-item.legend-theatre {
+  background: rgba(81, 210, 195, 0.5);
+}
+
 
 /* ═══════════════════════════════════════════════════════════
    VEGA CONTAINERS

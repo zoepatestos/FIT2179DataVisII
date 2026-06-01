@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Stacked column chart of reported value (AUD millions) by organisation across years (2021-2026). Years run along the x-axis, stacked value on the y-axis, each organisation a coloured segment. Click a legend entry to spotlight one organisation across all years.",
+  "background": "transparent",
+  "width": "container",
+  "height": 460,
+  "title": {
+    "text": "",
+    "subtitle": "Values in AUD millions  •  click a legend entry to spotlight one organisation",
+    "subtitleFontSize": 10,
+    "subtitleFontStyle": "italic",
+    "subtitleColor": "#5a5753",
+    "anchor": "start"
+  },
+  "data": { "url": "data/market_share_theatres_galleries_museums.csv" },
+  "transform": [
+    { "fold": ["2022", "2023", "2024", "2025"], "as": ["Year", "Value"] },
+    { "calculate": "toNumber(datum.Value)", "as": "value_num" }
+  ],
+  "mark": {
+    "type": "bar",
+    "stroke": "#ffffffa0",
+    "strokeWidth": 1
+  },
+  "params": [
+    {
+      "name": "org_select",
+      "select": { "type": "point", "fields": ["Category"] },
+      "bind": "legend"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": { "labelAngle": 0, "labelFontSize": 11, "titleFontSize": 12 }
+    },
+    "y": {
+      "field": "value_num",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Value (AUD millions)",
+      "axis": { "labelFontSize": 10, "titleFontSize": 12, "format": "$,.0f" }
+    },
+    "color": {
+      "field": "Category",
+      "type": "nominal",
+      "scale": { 
+          "range": [
+          "#A83090",
+          "#C455A8",
+          "#C47AB8",
+          "#C4A0C2",
+          "#A8C95A",
+          "#7ECF6A",
+          "#52C986",
+          "#3DBD9E",
+          "#29A0B1",
+          "#2878B8",
+          "#2E4FA3"
+        ]
+    },
+      "legend": {
+        "title": "Organisation",
+        "orient": "right",
+        "labelLimit": 240,
+        "labelFontSize": 10,
+        "symbolType": "square"
+      }
+    },
+    "opacity": {
+      "condition": { "param": "org_select", "value": 1 },
+      "value": 0.12
+    },
+    "tooltip": [
+      { "field": "Year",      "type": "ordinal",      "title": "Year" },
+      { "field": "Category",  "type": "nominal",      "title": "Organisation" },
+      { "field": "value_num", "type": "quantitative", "title": "Value (AUD Millions)", "format": "$," }
+    ]
+  },
+  "config": {
+    "view":   { "stroke": null },
+    "font":   "Host Grotesk, Helvetica, sans-serif",
+    "legend": { "labelColor": "#3e3c39", "titleColor": "#2c2420" },
+    "axis":   { "labelColor": "#3e3c39", "titleColor": "#2c2420", "gridColor": "#e6e2dc" }
+  }
+}

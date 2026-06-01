@@ -1,0 +1,1197 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Small multiples of Australian state outlines with proportional bubbles encoding art galleries per 100,000 residents. Panels sorted left to right by rate descending; each state map auto-fits its column and a proportional bubble is pinned to the panel centre, so all maps and bubbles share one horizontal axis directly above their subheading. Gallery counts aggregated live from artguide_galleries.csv; population from ABS Sep-2025 release. A pow(2) size scale makes bubble radius proportional to rate for dramatic size contrast, with a vertical reference size legend on the right.",
+  "title": {
+    "text": "Galleries per 100,000 residents, by state",
+    "anchor": "start",
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "color": "#2c2420"
+  },
+  "background": "transparent",
+  "spacing": 8,
+  "hconcat": [
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "ACT",
+        "subtitle": "5.1 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_provinces_australia.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [
+            {
+              "filter": "datum.properties.name == 'Australian Capital Territory'"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'ACT'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Australian Capital Territory'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "486.2",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "VIC",
+        "subtitle": "3.4 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_VIC.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'VIC'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Victoria'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "7104.3",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "TAS",
+        "subtitle": "3.1 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_TAS.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'TAS'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Tasmania'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "576.7",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "NT",
+        "subtitle": "2.6 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_NT.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'NT'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Northern Territory'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "265.5",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "NSW",
+        "subtitle": "1.9 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_NSW.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'NSW'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'New South Wales'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "8624.5",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "SA",
+        "subtitle": "1.7 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_SA.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'SA'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'South Australia'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "1908.2",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "QLD",
+        "subtitle": "1.1 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_QLD.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'QLD'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Queensland'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "5692.6",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "WA",
+        "subtitle": "1.1 per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 11,
+        "color": "#3e3c39",
+        "fontWeight": 600,
+        "subtitleColor": "#857d82",
+        "subtitleFontSize": 9,
+        "subtitleFontStyle": "italic",
+        "subtitlePadding": 2
+      },
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "../js/ne_10m_admin_1_states_WA.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_10m_admin_1_states_provinces"
+            }
+          },
+          "transform": [],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0ece6",
+            "fillOpacity": 0.55,
+            "stroke": "#5a5753",
+            "strokeWidth": 0.8
+          }
+        },
+        {
+          "data": {
+            "url": "../data/artguide_galleries.csv"
+          },
+          "transform": [
+            {
+              "filter": "datum.state == 'WA'"
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "gallery_count"
+                }
+              ],
+              "groupby": [
+                "state"
+              ]
+            },
+            {
+              "calculate": "'Western Australia'",
+              "as": "state_name"
+            },
+            {
+              "calculate": "3061.7",
+              "as": "pop_k"
+            },
+            {
+              "calculate": "datum.pop_k * 1000",
+              "as": "population_people"
+            },
+            {
+              "calculate": "datum.gallery_count / datum.pop_k * 100",
+              "as": "per100k"
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "value": 64
+            },
+            "size": {
+              "field": "per100k",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "gallery_count",
+                "type": "quantitative",
+                "title": "Galleries",
+                "format": ","
+              },
+              {
+                "field": "population_people",
+                "type": "quantitative",
+                "title": "Population",
+                "format": ",.0f"
+              },
+              {
+                "field": "per100k",
+                "type": "quantitative",
+                "title": "Galleries per 100,000",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 70,
+      "height": 140,
+      "background": "transparent",
+      "title": {
+        "text": "per 100k",
+        "orient": "bottom",
+        "anchor": "middle",
+        "fontSize": 9,
+        "fontWeight": "normal",
+        "color": "#857d82",
+        "fontStyle": "italic"
+      },
+      "data": {
+        "values": [
+          {
+            "v": 5
+          },
+          {
+            "v": 3
+          },
+          {
+            "v": 1
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "fill": "#b8a8e8",
+            "fillOpacity": 0.82,
+            "stroke": "#7a6bb8",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 26
+            },
+            "y": {
+              "field": "v",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  6.5
+                ]
+              },
+              "axis": null
+            },
+            "size": {
+              "field": "v",
+              "type": "quantitative",
+              "scale": {
+                "type": "pow",
+                "exponent": 2,
+                "domain": [
+                  0,
+                  5.5
+                ],
+                "range": [
+                  0,
+                  3400
+                ]
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 10,
+            "color": "#3e3c39",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "value": 58
+            },
+            "y": {
+              "field": "v",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  6.5
+                ]
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "v",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Host Grotesk, Helvetica, sans-serif"
+  }
+}

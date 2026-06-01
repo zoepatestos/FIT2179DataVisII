@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Globe choropleth showing each country's share of Australia's art material imports, by year and category. Params controlled externally via HTML sliders/buttons wired with view.signal().",
-  "width": 600,
-  "height": 600,
+  "width": 500,
+  "height": 500,
   "background": null,
   "params": [
     { "name": "category_selection", "value": "Paints"    },
@@ -14,7 +14,7 @@
     "rotate": {
       "expr": "view_angle === 'Australia' ? [-133, 25, 0] : view_angle === 'Europe' ? [-10, -45, 0] : [95, -20, 0]"
     },
-    "scale": 280
+    "scale": 230
   },
   "layer": [
     {
@@ -48,8 +48,9 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#6b6762",
+        "fill": "#3e3c39",
         "stroke": "#c9c9c9",
+        "strokeDash": [1,1],
         "strokeWidth": 0.4
       }
     },
@@ -90,6 +91,7 @@
       "mark": {
         "type": "geoshape",
         "stroke": "#c9c9c9",
+        "strokeDash": [1,1],
         "strokeWidth": 0.4
       },
       "encoding": {
@@ -98,18 +100,25 @@
           "type": "quantitative",
           "scale": {
             "type": "linear",
-            "scheme": "purples"
+            "scheme": "goldorange",
+            "domain": [0, 1],
+            "clamp": true
           },
           "legend": {
-            "title": ["Share of Australia's", "imports (year & category)"],
-            "orient": "bottom-left",
-            "format": ".1%"
+            "title": ["Share of Australia's", "imports" ,"(Year & Category)"],
+            "orient": "left",
+            "direction": "vertical",
+            "gradientLength": 220,
+            "gradientThickness": 14,
+            "format": ".0%",
+            "titlePadding": 8,
+            "offset": 8
           }
         },
         "tooltip": [
           {"field": "properties.NAME",  "type": "nominal",      "title": "Country"},
-          {"field": "value_usd",        "type": "quantitative", "title": "Import value (USD)",  "format": "$,.0f"},
-          {"field": "share_of_imports", "type": "quantitative", "title": "Share of imports",    "format": ".1%"},
+          {"field": "value_usd",        "type": "quantitative", "title": "Export value to AUS(USD)",  "format": "$,.0f"},
+          {"field": "share_of_imports", "type": "quantitative", "title": "% of global exports to AUS",    "format": ".1%"},
           {"field": "year",             "type": "ordinal",      "title": "Year"},
           {"field": "category",         "type": "nominal",      "title": "Category"}
         ]

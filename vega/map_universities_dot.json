@@ -3,7 +3,7 @@
   "description": "Dot map of Australian art venues. active_type param is top-level so both dot layers can read it.",
   "width": "container",
   "height": 520,
-  "background": "#c9c9c9",
+  "background": "#FFFDF7",
   "projection": { "type": "mercator" },
   "params": [
     { "name": "active_type", "value": "all" }
@@ -21,7 +21,7 @@
       "mark": {
         "type": "geoshape",
         "fill": "#3e3c39",
-        "stroke": "#c9c9c9",
+        "stroke": "#FFFDF7",
         "strokeWidth": 1
       }
     },

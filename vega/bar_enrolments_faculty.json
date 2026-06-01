@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Horizontal bar chart of university enrolments by field of education (faculty). Reactive to year_selection (year as string; 'All' = sum across 2020-2024) and selected_university (institution name; 'All' = sum across all universities). Both signals are set externally from HTML.",
+  "description": "Radial (concentric race-track) bar chart of university enrolments by field of education (faculty). Each faculty is its own ring; the swept angle encodes enrolments and a colour legend identifies the ring. Reactive to year_selection (year as string; 'All' = sum across 2020-2024) and selected_university (institution name; 'All' = sum across all universities). Both signals are set externally from HTML.",
   "width": "container",
-  "height": 360,
+  "height": 380,
   "background": "transparent",
   "data": { "url": "data/university_enrolments_long.csv" },
   "params": [
@@ -19,35 +19,72 @@
     {
       "aggregate": [{"op": "sum", "field": "enrolments", "as": "total"}],
       "groupby": ["faculty"]
-    }
-  ],
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 3
-  },
-  "encoding": {
-    "y": {
-      "field": "faculty",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null,
-      "axis": { "labelLimit": 240, "labelFontSize": 11 }
     },
-    "x": {
+    {
+      "window": [{"op": "rank", "as": "ring"}],
+      "sort": [{"field": "total", "order": "ascending"}]
+    },
+    { "calculate": "26 + (datum.ring - 1) * 9.5", "as": "r_inner" },
+    { "calculate": "datum.r_inner + 10",            "as": "r_outer" }
+  ],
+  "mark": { "type": "arc", "cornerRadius": 2, "stroke": "#ffffff", "strokeWidth": 1},
+  "encoding": {
+    "theta": {
       "field": "total",
       "type": "quantitative",
-      "title": "Students enrolled",
-      "axis": {
-        "labelExpr": "replace(format(datum.value, '~s'), 'k', 'K')",
-        "labelFontSize": 10
+      "stack": null,
+      "scale": {
+        "domain": { "expr": "selected_university != 'All' ? [0, 80000] : (year_selection == 'All' ? [0, 1800000] : [0, 400000])" },
+        "range": [0, 6.05]
       }
     },
+    "radius":  { "field": "r_outer", "type": "quantitative", "scale": null },
+    "radius2": { "field": "r_inner", "type": "quantitative", "scale": null },
     "color": {
-      "condition": {
-        "test": "datum.faculty === 'Creative Arts'",
-        "value": "#f58ed6"
+      "field": "faculty",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Management and Commerce",
+          "Society and Culture",
+          "Health",
+          "Information Technology",
+          "Education",
+          "Natural and Physical Sciences",
+          "Engineering and Related Technologies",
+          "Creative Arts",
+          "Architecture and Building",
+          "Agriculture, Environmental and Related Studies",
+          "Non-Award Courses",
+          "Mixed Field Programmes",
+          "Food, Hospitality and Personal Services"
+        ],
+"range": [
+  "#4a6fa5",
+  "#5a7fb5",
+  "#6a8fc5",
+  "#7a9fd5",
+  "#8aafd5",
+  "#7a8fa5",
+  "#6a7f95",
+  "#e8a0bf",
+  "#5a6f85",
+  "#4a5f75",
+  "#8a9aaa",
+  "#9aaaba",
+  "#aabaca"
+]
       },
-      "value": "#857d82"
+      "legend": {
+        "title": "Field of study",
+        "orient": "right",
+        "direction": "vertical",
+        "symbolType": "circle",
+        "labelLimit": 180,
+        "labelFontSize": 10,
+        "titleFontSize": 11,
+        "rowPadding": 3
+      }
     },
     "tooltip": [
       { "field": "faculty", "type": "nominal",      "title": "Field of study" },
@@ -56,7 +93,7 @@
   },
   "config": {
     "view":  { "stroke": null },
-    "axis":  { "gridColor": "rgba(255,255,255,0.06)", "domainColor": "#5a5753", "tickColor": "#5a5753", "labelColor": "#3e3c39", "titleColor": "#3e3c39" },
+    "legend": { "labelColor": "#3e3c39", "titleColor": "#3e3c39" },
     "font":  "Host Grotesk, Helvetica, sans-serif"
   }
 }

@@ -69,31 +69,60 @@
         <div class="act-contents">
           <h2>Venues and Spaces</h2>
           <p class="act-intro">
-           Before we ask who makes art or what it costs, we ask where it lives. Which walls hold it, which stages host it, which postcodes get to see it up close.
+          Austalia is home to <span style = "font-size: 30px;">589</span> art galleries and <span style = "font-size: 30px;">1,047</span> theatres. Majority of which are located along the eastern seaboard, with a thick seam running down from Brisbane to Melbourne. 
           </p>
-          <!-- CHART 1 — Dot map of gallery + theatre locations -->
-          <div class="chart-block chart-block--hero">
-            <div class="chart-label">Chart 1</div>
-            <h3 class="chart-title">Art gallery &amp; theatre locations across Australia</h3>
-            <p class="chart-caption">
-             A thick seam runs down the eastern seaboard. The interior is almost empty. For most Australians, art lives within a short drive; for a sizeable minority, it lives a flight away.
-            <div class="map-with-legend">
-              <div id="map-galleries" class="vega-chart vega-chart--l"></div>
-              <aside class="custom-map-legend" id="map-legend">
-                <p class="legend-label">Filter</p>
-                <button class="legend-item" data-type="Art Gallery" title="Art Galleries">
-                  <img src="images/artist.png" width ="100" alt="Art Gallery icon" />
-                  <span>Art Galleries</span>
-                </button>
-                <button class="legend-item" data-type="Theatre" title="Theatres">
-                  <img src="images/cinema.png" width="100" alt="Theatre icon" />
-                  <span>Theatres</span>
-                </button>
-              </aside>
+
+          <p class="act-intro">
+          
+          Not all of these theatres and galleries are the same. Some are large institutions such as the <span style = "font-size: 25px;">National Gallery of Victoria</span> and the <span style = "font-size: 25px;">Sydney Opera House</span>, while others are small, independent spaces that cater to local communities. The distribution of these venues reflects the population density and cultural hubs across the country, with a significant concentration in major cities.
+          <div class="chart-grid chart-grid--2col">
+
+        <!-- Chart 1 — Dot map of gallery + theatre locations -->
+            <div class="chart-block chart-block--hero">
+              <div class="chart-label">Chart 1</div>
+              <h3 class="chart-title">Art gallery &amp; theatre locations across Australia</h3>
+              <p class="chart-caption">
+              Plotted as points on a map, the 1,636 venues can be seen mostly bordering Australia, with only a single theatre and single gallery nearing the centre. <span style="font-size: 15px; background-color: #51d2c39b;" > Totem Theatre </span> and <span style = "font-size: 15px; background-color: #9d11bd74;" > RAFT Artspace </span>. The interactive legend filters by type with noticeably some overlap. <span style="font-size: 20px;"> 10 </span> venues are both a gallery and theatre.
+             <div class="map-with-legend">
+                <div id="map-galleries" class="vega-chart vega-chart--l"></div>
+                <aside class="custom-map-legend" id="map-legend">
+                  <p class="legend-label">Filter</p>
+                  <button class="legend-item legend-gallery" data-type="Art Gallery" title="Art Galleries">
+                    <img src="images/artist.png" width ="40" alt="Art Gallery icon" />
+                    <span>Art Galleries</span>
+                  </button>
+                  <button class="legend-item legend-theatre" data-type="Theatre" title="Theatres">
+                    <img src="images/cinema.png" width="40" alt="Theatre icon" />
+                    <span>Theatres</span>
+                  </button>
+                </aside>
+              </div>
             </div>
+
+
+          <!-- Chart 2 — Nightingale rose chart of major arts organisations -->
+          <div class="chart-block">
+              <div class="chart-label">Chart 2</div>
+              <h3 class="chart-title">Market Value of Australia's major arts organisations, 2022–2025</h3>
+              <p class="chart-caption">
+                Australia's largest arts organisations operate on vastly different scales, from state galleries to national performing arts companies. Together, however, they reveal a common trend: revenues increased steadily after 2022, driven largely by major institutions such as the <span style="background-color: #C455A8; font-size: 15px;">Art Gallery of New South Wales</span>, <span style="background-color: #7ECF6A; font-size: 15px;">National Gallery of Victoria</span> and the <span style="background-color: #2878B8; font-size: 15px;">Sydney Opera House</span>. Only years with complete reporting are included.
+              </p>
+              <div id="rose-market-share" class="vega-chart vega-chart--md"></div>
           </div>
 
-         
+        </div>
+
+        <!-- Chart 3 — Galleries per 100,000 residents, small multiples -->
+        <div class="chart-block chart-block--hero">
+          <div class="chart-label">Chart 3</div>
+          <h3 class="chart-title">Galleries per 100,000 residents, by state</h3>
+          <p class="chart-caption">
+            Small states naturally rise on a per-capita measure, but the reordering against
+            Chart 1's raw count is the point.
+          </p>
+          <div id="bubble-per-capita" class="vega-chart"></div>
+        </div>
+
         </div>
       </header>
 
@@ -112,19 +141,20 @@
         <div class="act-rule"></div>
         <h2>Education and Occupations</h2>
         <p class="act-intro">
-         Infrastructure on its own does not make a creative industry. People do. This act follows them from the field they enrol in, to the university they pick, to the work they take up once they leave.
+         Despite the importance of infrastructure in preserving and promoting the arts, it is the people who drive the creative industry. Creative arts is considered a smaller industry in Australia, with only <span style = "font-size: 30px;"> 4.1% </span> of the population working in creative roles as their <em> primary </em> job title, with <span style = "font-size: 30px;"> 4.5% </span> of the population working in creative roles as a <em> secondary </em> job title.  
         </p>
       </header>
 
       <div class="chart-grid chart-grid--2col">
 
-        <!-- Chart 2 — Enrolments bar chart, reactive to chart 3 + year buttons -->
+        <!-- Chart 4 — Enrolments radial bar chart, reactive to chart 4 + year buttons -->
         <div class="chart-block">
-            <div class="chart-label chart-label--light">Chart 2</div>
+            <div class="chart-label">Chart 4</div>
             <h3 class="chart-title">Enrolments by Field of Study</h3>
             <p class="chart-caption">
-            Creative Arts sits well below the headline disciplines. Society and Culture, Management, and Health draw far larger cohorts year after year. Some specialist schools tell a very different story to the national one.
-            </p>
+            It's easily recognisable that <span style = "background-color: #e8a0bf; font-size: 15px;"> creative arts</span> is not as popular amongst students in Australia as other fields of study. In 2024, there were only <span style = "font-size: 20px;"> 96,067 </span> enrolments in  <span style = "background-color: #e8a0bf; font-size: 15px;"> creative arts</span> courses across the country, compared to <span style = "font-size: 20px;"> 1,723,111 </span> enrolments in <span style = "background-color: #4a6fa5; color: #FFFDF7; font-size: 15px;"> Management and Commerce</span>.
+            Despite this, it remains a vital sector.
+          </p>
 
             <!-- Horizontal year slider + All-years button -->
             <div class="year-slider-h-row" id="enrol-year-control">
@@ -148,32 +178,71 @@
             
         </div>
 
-        <!-- Chart 3 — Universities map (clickable). Light #c9c9c9 frame to match the map's own background. -->
+        <!-- Chart 5 — Universities map (clickable). Light #c9c9c9 frame to match the map's own background. -->
         <div class="chart-block">
-          <div class="chart-frame chart-frame--mute">
-            <div class="chart-label">Chart 3</div>
+      
+            <div class="chart-label">Chart 5</div>
             <h3 class="chart-title">Universities Across Australia</h3>
             <p class="chart-caption">
-             Forty-three universities, scattered with the same eastern bias as the galleries.
-            </p>
+            Below we can see the distribution of universities across Australia, with a clear concentration along the eastern seaboard. The Queensland University of Technology and RMIT University are the most prominent, with <span style="font-size: 20px;">6,567</span> and <span style="font-size: 20px;">11,252</span> enrolments in creative arts courses respectively.           
+          </p>
+            <p class="chart-caption" style="font-size: 10px;">
+            <em> Clicking on each university in the map below will filter the enrolments in Chart 4 to show only that university's enrolments, allowing us to see how each institution contributes to the overall creative arts education landscape in Australia.
+            </em> </p>
             <div id="map-universities" class="vega-chart vega-chart--md"></div>
-          </div>
+          
         </div>
 
       </div>
 
-      <!-- Chart 4 — Creative occupations: two-lollipop redesign -->
-      <div class="chart-block">
-          <div class="chart-label chart-label--light">Charts 4 and 5 </div>
-          <h3 class="chart-title">From study to wage — the creative workforce</h3>
-          <p class="chart-caption">
-          Following enrolments out into the workforce, two questions remain. How many people actually do each of these jobs, and what does the job pay?
-The answers do not line up. Graphic Designer, Interior Designer, and Photographer dominate by headcount, but their pay sits near the middle of the pack. The best-paid roles, Artistic Director and the visual arts professions, employ only a few hundred people each. A creative career splits early: the common roles are steady but modest, the lucrative ones are rare and senior.
-          </p>
-          <p class="chart-caption" style="font-size: 0.75rem; font-style: italic; opacity: 0.8;">
-            Employment count and salary deviation are shown as different chart types because they answer different questions — one about scale, the other about relative pay.
-          </p>
-          <div id="bar-occupations" class="vega-chart vega-chart--lg"></div>
+      <!-- Charts 6 and 7 — creative workforce, in a 2-col grid mirroring Charts 2 & 3 -->
+      <div class="workforce-intro">
+        <p >
+          Despite the relatively low number of enrolments in creative arts courses, there is still a significant workforce in creative roles in Australia. 
+        </p>
+        <p>
+           When we compare, employment count vs salary, we can see that the most populous roles: <span style="background-color: #e8a0bf; font-size: 15px;">
+                 Graphic Designers</span>, <span style="background-color: #e8a0bf; font-size: 15px;"> Photographers</span>, and 
+                 <span style="background-color: #e8a0bf; font-size: 15px;"> Interior Designers</span> all earn below or equivalent to the average, 
+                 proving that most people in this industry are more likely to choose their career based on passion rather than pay. 
+        </p>
+                 <p>        
+                 On the other hand, the less populous roles such as <span style="background-color: #e8a0bf; font-size: 15px;"> Art Directors</span>,  
+                 <span style="background-color: #e8a0bf; font-size: 15px;"> Painters</span>, and 
+                 <span style="background-color: #e8a0bf; font-size: 15px;"> Sculptors</span> earn significantly above the average, suggesting that these roles may require more specialised skills or experience.
+        </p>
+      </div>
+
+      <div class="chart-grid chart-grid--2col">
+
+        <!-- Chart 6 — Employment count per role -->
+        <div class="chart-block">
+            <div class="chart-label">Chart 6</div>
+            <h3 class="chart-title">How many people work in each creative role</h3>
+            <p class="chart-caption">
+              The 14 ANZSCO occupations classified under "Creative and Performing Artists" recognise a total of <span style = "font-size: 20px;"> 84,100  </span> people employed across the country in accordance with the 2021 Australian Bureau of Statistics Census.
+  
+            </p>
+            <div id="bar-employment" class="vega-chart vega-chart--md"></div>
+        </div>
+
+        <!-- Chart  7— Salary deviation from the average -->
+        <div class="chart-block">
+            <div class="chart-label">Chart 7</div>
+            <h3 class="chart-title">Which roles pay above or below the average</h3>
+            <p class="chart-caption">
+              The average across the 14 roles with published salaries is <span style="font-size: 20px;">$96,230</span>.
+              
+             
+            </p>
+            <p class="chart-caption" style="font-size: 10px;">
+            <em>                           Bars to the left earn less than average, bars to the right earn more than average.
+
+            </em> </p>
+
+            <div id="bar-salary" class="vega-chart vega-chart--md"></div>
+        </div>
+
       </div>
 
 
@@ -197,7 +266,7 @@ The answers do not line up. Graphic Designer, Interior Designer, and Photographe
       </header>
 
       <div class="chart-block chart-block--hero">
-          <div class="chart-label">Chart 6</div>
+          <div class="chart-label">Chart 8</div>
           <h3 class="chart-title">Global sources of Australia's art material imports, 2014–2025</h3>
           <p class="chart-caption">
            Different materials, different maps. Chinese paints, Italian clay and stone, New Zealand drawing supplies, textiles spread across Asia. Dominance shifts year to year.
@@ -208,6 +277,7 @@ The answers do not line up. Graphic Designer, Interior Designer, and Photographe
             <!-- Column 2: year slider -->
             <aside class="year-slider-aside">
               <p class="legend-label">Year</p>
+              <button class="year-all-btn" id="globe-all-years" type="button">All Years</button>
               <output class="year-display" id="year-display">2024</output>
               <div class="year-slider-track">
                 <span class="year-tick">2025</span>
@@ -217,7 +287,7 @@ The answers do not line up. Graphic Designer, Interior Designer, and Photographe
                        min="2014" max="2025" step="1" value="2024" />
                 <span class="year-tick">2014</span>
               </div>
-              <button class="year-all-btn" id="globe-all-years" type="button">All years</button>
+             
             </aside>
 
             <!-- Column 3: centre-view buttons -->
@@ -237,27 +307,65 @@ The answers do not line up. Graphic Designer, Interior Designer, and Photographe
             <!-- Column 3: category buttons -->
             <aside class="custom-map-legend" id="imports-legend">
               <p class="legend-label">Category</p>
+              <button class="legend-item legend-item--text legend-all" data-category="All" title="All categories" type="button">
+                <span>All Categories</span>
+              </button>
               <button class="legend-item legend-active" data-category="Paints" title="Paints">
-                <img src="images/paint.png" alt="Paints icon" />
+                <img src="images/paint.png" width="40" alt="Paints icon" />
                 <span>Paints</span>
               </button>
               <button class="legend-item" data-category="Drawing supplies" title="Drawing supplies">
-                <img src="images/draw.png" alt="Drawing supplies icon" />
+                <img src="images/draw.png" width="40" alt="Drawing supplies icon" />
                 <span>Drawing</span>
               </button>
               <button class="legend-item" data-category="Clay, stone &amp; tools" title="Clay, stone &amp; tools">
-                <img src="images/sculpt.png" alt="Clay, stone &amp; tools icon" />
+                <img src="images/sculpt.png" width="40" alt="Clay, stone &amp; tools icon" />
                 <span>Clay &amp; Stone</span>
               </button>
               <button class="legend-item" data-category="Textiles" title="Textiles">
-                <img src="images/sew.png" alt="Textiles icon" />
+                <img src="images/sew.png" width="40" alt="Textiles icon" />
                 <span>Textiles</span>
               </button>
-              <button class="legend-item legend-item--text legend-all" data-category="All" title="All categories" type="button">
-                <span>All categories</span>
-              </button>
+
             </aside>
           </div>
+        </div>
+
+        <div class="chart-grid chart-grid--2col">
+
+        <!-- Chart 9 — Revenue and profit area chart -->
+        <div class="chart-block">
+          <div class="chart-label">Chart 9</div>
+          <h3 class="chart-title">Revenue and profit of Australian art galleries &amp; museums</h3>
+          <p class="chart-caption">
+            Total annual revenue stays remarkably stable around AUD&nbsp;$2–2.7&nbsp;billion across the 2013–2026 period.
+            What changes is <em>how</em> that revenue splits between operating costs (upper band, slate) and
+            profit (lower band, warm beige). The dark line is the profit threshold — everything above it is what
+            the industry spends to operate, everything below it is what it keeps. The 2017 inflection, when
+            profit margin jumped from 8.5% to 31.9%, marks a fundamental cost-cutting shift. Hover any year for
+            the exact split.
+          </p>
+          <div id="area-revenue-profit" class="vega-chart vega-chart--md"></div>
+        </div>
+
+
+        <!-- Chart 10 — Government funding "paint-fill" small multiples -->
+         
+        <div class="chart-block">
+          <div class="chart-label">Chart 10</div>
+          <h3 class="chart-title">Government funding for heritage &amp; arts, 1999–2032</h3>
+          <p class="chart-caption">
+            One box per year, read left to right. Each box fills with green “paint” up to that
+            year's federal funding on a fixed 0–$15&nbsp;billion scale — the paint-pour marker
+            rides the surface, climbing as funding grows from $3.8&nbsp;B in 1999 to
+            $12.9&nbsp;B in 2032. The slim bar before each box shows the year-on-year change on a
+            0–15% scale: <strong style="color:#6c5ce7">blue</strong> when funding rose,
+            <strong style="color:#e23b3b">red</strong> when it fell (only 2016 dips).
+          </p>
+          <div id="funding-paint" class="vega-chart"></div>
+        </div>
+
+   
         </div>
 
       </div>

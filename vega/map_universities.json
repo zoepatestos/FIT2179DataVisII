@@ -3,7 +3,7 @@
   "description": "Dot map of Australian universities. Clicking a dot fires the uni_select point-selection, which JS bridges to the enrolments bar chart.",
   "width": "container",
   "height": 360,
-  "background": "#c9c9c9",
+  "background": "#FFFDF7",
   "projection": { "type": "mercator" },
   "layer": [
     {
@@ -17,7 +17,7 @@
       "mark": {
         "type": "geoshape",
         "fill": "#3e3c39",
-        "stroke": "#c9c9c9",
+        "stroke": "#FFFDF7",
         "strokeWidth": 0.8
       }
     },
