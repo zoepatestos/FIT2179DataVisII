@@ -39,7 +39,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_provinces_australia.topojson",
+            "url": "js/ne_10m_admin_1_states_provinces_australia.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -60,7 +60,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -177,7 +177,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_VIC.topojson",
+            "url": "js/ne_10m_admin_1_states_VIC.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -194,7 +194,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -311,7 +311,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_TAS.topojson",
+            "url": "js/ne_10m_admin_1_states_TAS.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -328,7 +328,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -445,7 +445,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_NT.topojson",
+            "url": "js/ne_10m_admin_1_states_NT.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -462,7 +462,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -579,7 +579,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_NSW.topojson",
+            "url": "js/ne_10m_admin_1_states_NSW.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -596,7 +596,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -713,7 +713,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_SA.topojson",
+            "url": "js/ne_10m_admin_1_states_SA.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -730,7 +730,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -847,7 +847,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_QLD.topojson",
+            "url": "js/ne_10m_admin_1_states_QLD.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -864,7 +864,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {
@@ -981,7 +981,7 @@
       "layer": [
         {
           "data": {
-            "url": "../js/ne_10m_admin_1_states_WA.topojson",
+            "url": "js/ne_10m_admin_1_states_WA.topojson",
             "format": {
               "type": "topojson",
               "feature": "ne_10m_admin_1_states_provinces"
@@ -998,7 +998,7 @@
         },
         {
           "data": {
-            "url": "../data/artguide_galleries.csv"
+            "url": "data/artguide_galleries.csv"
           },
           "transform": [
             {

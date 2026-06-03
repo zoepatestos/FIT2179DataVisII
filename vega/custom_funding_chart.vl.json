@@ -41,8 +41,10 @@
         { "type": "formula", "as": "fillTop",   "expr": "datum.boxBottom - datum.fillFrac * boxH" },
         { "type": "formula", "as": "changeFrac","expr": "datum.change == null ? 0 : min(1, max(0, abs(datum.change) / 15))" },
         { "type": "formula", "as": "changeTop", "expr": "datum.boxBottom - datum.changeFrac * boxH" },
-        { "type": "formula", "as": "changeColor","expr": "datum.change == null ? null : (datum.change < 0 ? '#e23b3b' : '#6c5ce7')" },
-        { "type": "formula", "as": "tip", "expr": "{'Year': datum.year, 'Funding (AUD Billion)': format(datum.billions, '.2f'), 'Change': datum.change == null ? 'N/A' : (datum.change + '%')}" }
+        { "type": "formula", "as": "projected",   "expr": "datum.year >= 2027" },
+        { "type": "formula", "as": "fillColor",   "expr": "datum.year >= 2027 ? '#f2aacf' : '#e14490'" },
+        { "type": "formula", "as": "changeColor", "expr": "datum.change == null ? null : (datum.year >= 2027 ? (datum.change < 0 ? '#f0a0a0' : '#b3aef2') : (datum.change < 0 ? '#e23b3b' : '#6c5ce7'))" },
+        { "type": "formula", "as": "tip", "expr": "{'Year': datum.year, 'Funding (AUD Billion)': format(datum.billions, '.2f'), 'Change': datum.change == null ? 'N/A' : (datum.change + '%'), 'Data': datum.year >= 2027 ? 'Forecast' : 'Actual'}" }
       ]
     },
     {
@@ -94,7 +96,7 @@
           "width": { "signal": "boxW" },
           "y":  { "field": "fillTop" },
           "y2": { "field": "boxBottom" },
-          "fill": { "value": "#e14490" }
+          "fill": { "field": "fillColor" }
         },
         "update": { "tooltip": { "field": "tip" } }
       }

@@ -53,10 +53,12 @@
   </header>
 
   
-  <p class="hero-credit">
-    <em>Native honeysuckle </em> &nbsp;·&nbsp; <strong> Margaret Preston </strong> &nbsp;·&nbsp; 1933
+  <p class="hero-credit" style="display: flex; justify-content: space-between;">
+  <span>
+    <em>Artwork &nbsp;·&nbsp; Native honeysuckle </em> &nbsp;·&nbsp; <strong> Margaret Preston </strong> &nbsp;·&nbsp; 1933
+  </span>
+  <span>Data Visualisation II &nbsp;·&nbsp; <strong>Zoe Patestos</strong> &nbsp;·&nbsp; 33143579 &nbsp; &nbsp; &nbsp;  </span>
   </p>
-
   <!-- ════════════════════════════════════════════
        ACT I — VENUES & SPACES
   ═════════════════════════════════════════════ -->
@@ -83,7 +85,7 @@
 
         <!-- Chart 1 — Dot map of gallery + theatre locations -->
             <div class="chart-block chart-block--hero">
-              <div class="chart-label">Chart 1</div>
+              <div class="chart-label">Chart 1 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="artguide.com.au (art galleries); Eventfinda Australia (theatres)">Source</span></div>
               <h3 class="chart-title">Art gallery &amp; theatre locations across Australia</h3>
               <p class="chart-caption">
               Plotted as points, the <span style="font-size: 20px;">1,636</span> venues hug the coastline, with only a single gallery and a single theatre venturing near the centre: <span style = "font-size: 15px; background-color: #9d11bd74;" > RAFT Artspace </span> and <span style="font-size: 15px; background-color: #51d2c39b;" > Totem Theatre </span>. The interactive legend filters by type, and reveals a small overlap of <span style="font-size: 20px;"> 10 </span> venues that serve as both a gallery and a theatre.
@@ -106,7 +108,7 @@
 
           <!-- Chart 2 — Nightingale rose chart of major arts organisations -->
           <div class="chart-block">
-              <div class="chart-label">Chart 2</div>
+              <div class="chart-label">Chart 2 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="Annual reports — Sydney Opera House, Art Gallery of NSW, National Gallery of Victoria, Arts Centre Melbourne, Museum Victoria, Adelaide Festival Centre, Queensland Performing Arts Trust, Sydney Symphony Orchestra, Opera Australia, The Australian Ballet, NGA">Source</span></div>
               <h3 class="chart-title">Market Value of Australia's major arts organisations, 2022–2025</h3>
               <p class="chart-caption">
                 Australia's largest arts organisations operate on vastly different scales, from state galleries to national performing arts companies. Together, however, they reveal a common trend: revenues increased steadily after 2022, driven largely by major institutions such as the <span style="background-color: #C455A8; font-size: 15px;">Art Gallery of New South Wales</span>, <span style="background-color: #7ECF6A; font-size: 15px;">National Gallery of Victoria</span> and the <span style="background-color: #2878B8; font-size: 15px;">Sydney Opera House</span>. Only years with complete reporting are included.
@@ -126,7 +128,7 @@
 
         <!-- Chart 3 — Galleries per 100,000 residents, small multiples -->
         <div class="chart-block chart-block--hero">
-          <div class="chart-label">Chart 3</div>
+          <div class="chart-label">Chart 3 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="artguide.com.au (gallery counts); ABS — Estimated Resident Population, Sep 2025">Source</span></div>
           <h3 class="chart-title">Galleries per 100,000 residents, by state</h3>
           <div class="grid-container">
         
@@ -201,7 +203,7 @@
 
         <!-- Chart 4 — Enrolments radial bar chart, reactive to chart 4 + year buttons -->
         <div class="chart-block">
-            <div class="chart-label">Chart 4</div>
+            <div class="chart-label">Chart 4 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="Dept of Education, Australian Government — Higher Education Statistics, HE Data Cube (2020–2024)">Source</span></div>
             <h3 class="chart-title">Enrolments by Field of Study</h3>
             <p class="chart-caption">
             It's easily recognisable that <span style = "background-color: #e8a0bf; font-size: 15px;"> creative arts</span> is not as popular amongst students in Australia as other fields of study. In 2024, there were only <span style = "font-size: 20px;"> 96,067 </span> enrolments in  <span style = "background-color: #e8a0bf; font-size: 15px;"> creative arts</span> courses across the country, compared to <span style = "font-size: 20px;"> 1,723,111 </span> enrolments in <span style = "background-color: #4a6fa5; color: #FFFDF7; font-size: 15px;"> Management and Commerce</span>.
@@ -227,13 +229,12 @@
             </div>
 
             <div id="bar-enrolments-faculty" class="vega-chart vega-chart--md"></div>
-            
         </div>
 
         <!-- Chart 5 — Universities map (clickable). Light #c9c9c9 frame to match the map's own background. -->
         <div class="chart-block">
       
-            <div class="chart-label">Chart 5</div>
+            <div class="chart-label">Chart 5 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="Dept of Education, Australian Government — Higher Education Statistics, HE Data Cube; ABS">Source</span></div>
             <h3 class="chart-title">Universities Across Australia</h3>
             <p class="chart-caption">
             Below we can see the distribution of universities across Australia, with a clear concentration along the eastern seaboard. <span style="background-color: rgba(255, 68, 0, 0.723); font-size: 15px;">The Queensland University of Technology </span> and <span style="background-color: rgba(255, 68, 0, 0.723); font-size: 15px;">RMIT University</span> are the most prominent, with <span style="font-size: 20px;">6,567</span> and <span style="font-size: 20px;">11,252</span> enrolments in creative arts courses respectively.           
@@ -242,7 +243,6 @@
             <em> Clicking on each university in the map below will filter the enrolments in Chart 4 to show only that university's enrolments, allowing us to see how each institution contributes to the overall creative arts education landscape in Australia.
             </em> </p>
             <div id="map-universities" class="vega-chart vega-chart--md"></div>
-          
         </div>
 
       </div>
@@ -270,7 +270,7 @@
 
         <!-- Chart 6 — Employment count per role -->
         <div class="chart-block">
-            <div class="chart-label">Chart 6</div>
+            <div class="chart-label">Chart 6 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="ABS — Census of Population and Housing 2021 (ANZSCO occupation counts)">Source</span></div>
             <h3 class="chart-title">How many people work in each creative role</h3>
             <p class="chart-caption">
               The 14 ANZSCO occupations classified under <span style="background-color: #fec93e; font-size: 15px;">Creative and Performing Artists</span> recognise a total of <span style = "font-size: 20px;"> 84,100  </span> people employed across the country in accordance with the 2021 Australian Bureau of Statistics Census.
@@ -285,7 +285,7 @@
 
         <!-- Chart  7— Salary deviation from the average -->
         <div class="chart-block">
-            <div class="chart-label">Chart 7</div>
+            <div class="chart-label">Chart 7 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="Jobs and Skills Australia — Occupation Data; ABS">Source</span></div>
             <h3 class="chart-title">Which roles pay above or below the average</h3>
             <p class="chart-caption">
               The average across the 14 roles with published salaries is <span style="font-size: 20px;">$96,230</span>.
@@ -324,7 +324,7 @@
       </header>
 
       <div class="chart-block chart-block--hero">
-          <div class="chart-label">Chart 8</div>
+          <div class="chart-label">Chart 8 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="ABS — International Merchandise Trade; UN Comtrade Database">Source</span></div>
           <h3 class="chart-title">Global sources of Australia's art material imports, 2014–2025</h3>
           <p class="chart-caption">
           Most of what fills Australia's studios comes from one quiet source: <span style="background-color: #2fb8d6; font-size: 15px;">New Zealand</span> supplies over half the <em>paints</em> and nearly half the <em>textiles</em>, year after year. <span style="background-color: #57fe78; font-size: 15px;">Italy</span> is the exception, anchoring the trade in <em>clay</em> and <em>stone</em>, while <em>drawing</em> supplies bounce between <span style="background-color: #2fb8d6; font-size: 15px;">New Zealand</span> and <span style="background-color: #2fb8d6; font-size: 15px;">Vietnam</span> from one year to the next. The rest of the world fills in the margins.
@@ -393,7 +393,7 @@
 
         <!-- Chart 9 — Revenue and profit area chart -->
         <div class="chart-block">
-          <div class="chart-label">Chart 9</div>
+          <div class="chart-label">Chart 9 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="IBISWorld — R8910 Art Galleries and Museums in Australia (Monash University Library)">Source</span></div>
           <h3 class="chart-title">Revenue and profit of Australian art galleries &amp; museums</h3>
           <p class="chart-caption">
             Revenue has barely moved since 2013, holding between <span style="font-size: 20px;">$1.9</span> and <span style="font-size: 20px;">$2.7</span> billion. 
@@ -413,7 +413,7 @@
         <!-- Chart 10 — Government funding "paint-fill" small multiples -->
          
         <div class="chart-block">
-          <div class="chart-label">Chart 10</div>
+          <div class="chart-label">Chart 10 &nbsp;·&nbsp; <span class="chart-source-tip" data-tip="Australian Government Budget Papers; Dept of Infrastructure, Transport, Regional Development, Communications and the Arts">Source</span></div>
           <h3 class="chart-title">Government funding for heritage &amp; arts, 1999–2032</h3>
           <p class="chart-caption">
             Public money tells the other half of the story. 
