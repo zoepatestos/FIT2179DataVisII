@@ -1096,31 +1096,28 @@
       "width": 70,
       "height": 420,
       "background": "transparent",
-      "title": {
-        "text": "per 100k",
-        "orient": "bottom",
-        "anchor": "middle",
-        "fontSize": 9,
-        "fontWeight": "normal",
-        "color": "#857d82",
-        "fontStyle": "italic"
-      },
+
       "data": {
         "values": [
           {
-            "v": 5
+            "v": 5,
+            "label": "5 per 100k"
           },
           {
-            "v": 4
+            "v": 4,
+            "label": "4 per 100k"
           },
           {
-            "v": 3
+            "v": 3,
+            "label": "3 per 100k"
           },
           {
-            "v": 2
+            "v": 2,
+            "label": "2 per 100k"
           },
           {
-            "v": 1
+            "v": 1,
+            "label": "1 per 100k"
           }
         ]
       },
@@ -1191,7 +1188,7 @@
               "axis": null
             },
             "text": {
-              "field": "v",
+              "field": "label",
               "type": "nominal"
             }
           }
