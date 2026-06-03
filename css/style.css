@@ -161,6 +161,7 @@ body {
   color: var(--c-charcoal);
   font-family: var(--f-sans);
   line-height: 1.65;
+  overflow-x: hidden;
 }
 
 h1,h2,h3,h4 { margin: 0; }
@@ -433,8 +434,8 @@ a:hover { color: var(--c-accent-dk); }
   line-height: 1.5;
   padding: 6px 10px;
   border-radius: 4px;
-  max-width: 600px;
-  min-width: 320px;
+  max-width: min(600px, 90vw);
+  min-width: 220px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
