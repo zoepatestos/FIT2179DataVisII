@@ -407,12 +407,15 @@ a:hover { color: var(--c-accent-dk); }
 .chart-label--light { color: var(--c-dark-chart); }
 
 /* Inline source tooltip next to chart label */
-.chart-source-tip {
+.chart-label .chart-source-tip {
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 2px;
   text-transform: none;
   letter-spacing: 0;
+  font-size: 10px;
+  font-weight: 400;
+  font-family: var(--f-sans);
   cursor: help;
   position: relative;
   display: inline-block;
