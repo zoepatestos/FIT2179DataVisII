@@ -138,7 +138,7 @@ function drawPaintbrushImage(ctx, x, y, height) {
   var el = document.getElementById("map-galleries");
   if (!el) return;
 
-  vegaEmbed("#map-galleries", "vega/map_galleries_dot.json", EMBED_OPT)
+  vegaEmbed("#map-galleries", "vega/map_galleries_dot.vl.json", EMBED_OPT)
     .then(function (result) {
       var view  = result.view;
       var items = document.querySelectorAll("#map-legend .legend-item");
@@ -164,14 +164,14 @@ function drawPaintbrushImage(ctx, x, y, height) {
       });
     })
     .catch(function (err) {
-      console.warn("map_galleries_dot.json failed:", err);
+      console.warn("map_galleries_dot.vl.json failed:", err);
       el.style.cssText = "display:flex;align-items:center;justify-content:center;color:#8a7e76;font-size:.82rem;";
       el.textContent   = "Map could not load — check the browser console.";
     });
 }());
 
-embed("bar-venues-state",  "bar_venues_state.json");
-embed("bar-venue-types",   "bar_venue_types.json");
+embed("bar-venues-state",  "bar_venues_state.vl.json");
+embed("bar-venue-types",   "bar_venue_types.vl.json");
 
 // ── Art material imports globe (category + view-angle legends) ──
 (function () {
@@ -194,7 +194,7 @@ embed("bar-venue-types",   "bar_venue_types.json");
     });
   }
 
-  vegaEmbed("#imports_globe", "vega/map_imports_globe.json", EMBED_OPT)
+  vegaEmbed("#imports_globe", "vega/map_imports_globe.vl.json", EMBED_OPT)
     .then(function (result) {
       var view = result.view;
 
@@ -224,24 +224,24 @@ embed("bar-venue-types",   "bar_venue_types.json");
       }
     })
     .catch(function (err) {
-      console.warn("map_imports_globe.json failed:", err);
+      console.warn("map_imports_globe.vl.json failed:", err);
       el.style.cssText = "display:flex;align-items:center;justify-content:center;color:#8a7e76;font-size:.82rem;";
       el.textContent   = "Globe could not load — check the browser console.";
     });
 }());
 
 // ── Act III — revenue + profit area chart + funding "paint-fill" small multiples ─────
-embed("area-revenue-profit", "area_revenue_profit.json");
+embed("area-revenue-profit", "area_revenue_profit.vl.json");
 embed("funding-paint",       "custom_funding_chart.vl.json");
 
 // ── Act I — Chart 2 — streamgraph of major arts organisations ──
 embed("rose-market-share", "stacked_column_chart_market_share.vl.json");
 
 // ── Act I — Chart 3 — galleries per 100k residents, small multiples ──
-embed("bubble-per-capita", "bubble_galleries_per_capita.json");
+embed("bubble-per-capita", "bubble_galleries_per_capita.vl.json");
 
 // ── Act II — Chart 5 — paintbrush lollipop/barchart (canvas overlay over Vega bars) ──
-vegaEmbed("#bar-employment", "vega/bar_employment.json", {
+vegaEmbed("#bar-employment", "vega/bar_employment.vl.json", {
   renderer: "canvas",   // must be canvas, not svg
   actions: false
 }).then(result => {
@@ -320,7 +320,7 @@ vegaEmbed("#bar-employment", "vega/bar_employment.json", {
   });
 });
 
-embed("bar-salary", "bar_salary.json");
+embed("bar-salary", "bar_salary.vl.json");
 
 // Charts 2 & 3 — enrolments bar (chart 2) wired to universities map (chart 3)
 (function () {
@@ -329,8 +329,8 @@ embed("bar-salary", "bar_salary.json");
   if (!barEl || !mapEl) return;
 
   Promise.all([
-    vegaEmbed("#bar-enrolments-faculty", "vega/bar_enrolments_faculty.json", EMBED_OPT),
-    vegaEmbed("#map-universities",       "vega/map_universities.json",       EMBED_OPT)
+    vegaEmbed("#bar-enrolments-faculty", "vega/bar_enrolments_faculty.vl.json", EMBED_OPT),
+    vegaEmbed("#map-universities",       "vega/map_universities.vl.json",       EMBED_OPT)
   ]).then(function (results) {
     var barView = results[0].view;
     var mapView = results[1].view;
@@ -395,6 +395,6 @@ embed("bar-salary", "bar_salary.json");
 }());
 
 // ── Act III — Money ──────────────────────────────────────
-embed("line-funding",         "line_funding.json");
-embed("bar-ticket-revenue",   "bar_ticket_revenue.json");
-embed("bar-import-commodity", "bar_import_commodity.json");
+embed("line-funding",         "line_funding.vl.json");
+embed("bar-ticket-revenue",   "bar_ticket_revenue.vl.json");
+embed("bar-import-commodity", "bar_import_commodity.vl.json");
