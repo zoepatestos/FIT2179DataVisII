@@ -41,12 +41,12 @@
         "longitude": { "field": "longitude", "type": "quantitative" },
         "latitude":  { "field": "latitude",  "type": "quantitative" },
         "color": {
-          "condition": { "param": "uni_select", "empty": true, "value": "#2cdada" },
-          "value": "#f2e44a"
+          "condition": { "param": "uni_select", "empty": true, "value": "rgba(255, 68, 0, 0.723)" },
+          "value": "#2cdada"
         },
         "size": {
-          "condition": { "param": "uni_select", "empty": true, "value": 90 },
-          "value": 220
+          "condition": { "param": "uni_select", "empty": true, "value": 220 },
+          "value": 90
         },
         "tooltip": [
           { "field": "institution", "type": "nominal", "title": "University" },

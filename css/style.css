@@ -343,6 +343,26 @@ a:hover { color: var(--c-accent-dk); }
 
 .act--dark .act-contents span { color: var(--c-dark-text); }
 
+/* Highlighted terms inside chart captions use the same display font in EVERY act.
+   In Act I the charts happen to sit inside .act-contents so its span rule applies;
+   Acts II & III close .act-contents before their charts, so this rule gives those
+   caption spans identical treatment (font only — inline font-size is preserved). */
+.chart-caption span,
+.workforce-intro span {
+  font-family: 'KyivType Sans', Georgia, sans-serif;
+  font-weight: 300;
+  color: var(--c-charcoal);
+}
+
+/* Mid-act intro for the workforce charts — breathing room above and below
+   so it reads as its own section divider. */
+.workforce-intro {
+  margin: 4.5rem 0;
+}
+
+.act--dark .chart-caption span,
+.act--dark .workforce-intro span { color: var(--c-dark-text); }
+
 /* ═══════════════════════════════════════════════════════════
    CHART LAYOUT
 ═══════════════════════════════════════════════════════════ */
@@ -562,7 +582,7 @@ a:hover { color: var(--c-accent-dk); }
   min-width: 120px;
   height: 4px;
   cursor: pointer;
-  accent-color: var(--c-accent-dk);
+  accent-color: var(--c-dark-muted);
 }
 
 .year-tick-h {
@@ -603,11 +623,16 @@ a:hover { color: var(--c-accent-dk); }
   cursor: pointer;
   white-space: nowrap;
 }
-.year-all-btn:hover { background: rgba(44,218,218,0.12); border-color: var(--c-accent); }
-.year-all-btn.year-btn--active {
-  background: var(--c-accent);
-  border-color: var(--c-accent);
+.year-all-btn:hover { 
+  background: var(--c-dark-muted);
   color: #000;
+  color: var(--c-cream); 
+}
+
+.year-all-btn.year-btn--active {
+  background: var(--c-charcoal);
+  color: #000;
+  color: var(--c-cream);
 }
 
 .year-btn {
@@ -625,14 +650,15 @@ a:hover { color: var(--c-accent-dk); }
 }
 
 .year-btn:hover {
-  background: rgba(44, 218, 218, 0.08);
-  border-color: var(--c-accent-dk);
+  background: var(--c-dark-muted);
+  color: #000;
+  color: var(--c-cream);
 }
 
 .year-btn--active {
-  background: var(--c-accent-dk);
+  background: var(--c-charcoal);
   color: #000;
-  border-color: var(--c-accent-dk);
+  color: var(--c-cream);
 }
 
 /* ── Active university filter pill (under the year buttons) ──── */
@@ -713,7 +739,7 @@ a:hover { color: var(--c-accent-dk); }
   width: 6px;
   height: 280px;
   cursor: pointer;
-  accent-color: var(--c-accent-dk);
+  accent-color: var(--c-charcoal);
 }
 
 /* Text-only button (no image) — compact variant for view-angle group */
@@ -742,9 +768,19 @@ a:hover { color: var(--c-accent-dk); }
 }
 
 /* Active / selected state */
-.legend-item.legend-active {
-  background: rgba(255, 253, 247, 0.5);
+.legend-item.legend-active-Australia {
+  background: #2fb8d6;
 }
+
+.legend-item.legend-active-Europe {
+  background: #57fe78;
+}
+
+.legend-item.legend-active-Americas {
+  background: #f145e5;
+}
+
+
 
 /* Active / selected state */
 .legend-item.legend-gallery {

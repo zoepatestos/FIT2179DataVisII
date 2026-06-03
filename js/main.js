@@ -5,6 +5,10 @@ const EMBED_OPT = {
   theme: "none"
 };
 
+// Define the gradient (starts at top left, ends at bottom right)
+
+
+
 // Load a spec from vega/ and embed into the given DOM id
 function embed(domId, specFile) {
   const el = document.getElementById(domId);
@@ -21,10 +25,20 @@ function embed(domId, specFile) {
 }
 
 
+
+
 function drawBrushStroke(ctx, xLeft, xRight, yCentre) {
+
+  let gradient = ctx.createLinearGradient(0, 0, 200, 200);
+
+// Add your colors (replacing your original '#fec93e' base)
+  gradient.addColorStop(0, '#fecf57');
+  gradient.addColorStop(1, '#feb703'); 
+
+// Apply it to the stroke
   const w = xRight - xLeft;
   ctx.save();
-  ctx.strokeStyle = '#fec93e';
+  ctx.strokeStyle = gradient;
   ctx.lineWidth = 10;
   ctx.lineCap = 'round';
   ctx.shadowColor = 'rgba(0,0,0,0.12)';

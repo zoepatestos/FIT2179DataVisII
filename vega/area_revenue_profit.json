@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Annual revenue of Australia's art galleries and museums, 2013-2026, decomposed into operating profit (lower zone) and expenditure (upper zone). The dark line where the two zones meet is the profit threshold: revenue * profit_margin = profit. Above the line is what the industry spends to operate; below the line is what it keeps.",
+  "description": "Annual revenue of Australia's art galleries and museums, 2013-2031, decomposed into operating profit (lower zone) and expenditure (upper zone). The dark line where the two zones meet is the profit threshold: revenue * profit_margin = profit. Above the line is what the industry spends to operate; below the line is what it keeps. Years from 2027 onward are projections (revenue is forecast in the source; profit margin is held at its last actual value of 26.7%) and are drawn faded to mark them as predictive.",
   "background": "transparent",
   "width": "container",
   "height": 380,
@@ -9,7 +9,7 @@
   },
   "transform": [
     { "calculate": "toNumber(datum.Category)", "as": "year" },
-    { "filter": "datum.year >= 2013 && datum.year <= 2026" },
+    { "filter": "datum.year >= 2013 && datum.year <= 2031" },
     {
       "lookup": "Category",
       "from": {
@@ -19,66 +19,84 @@
       }
     },
     { "calculate": "toNumber(datum['Annual Revenue ($bn)'])", "as": "revenue_bn" },
-    { "calculate": "toNumber(datum['Profit Margin'])",        "as": "profit_margin_pct" },
-    { "filter": "isValid(datum.profit_margin_pct)" },
+    { "calculate": "isValid(toNumber(datum['Profit Margin'])) ? toNumber(datum['Profit Margin']) : 26.7", "as": "profit_margin_pct" },
+    { "calculate": "datum.year > 2026 ? 'Forecast' : 'Actual'", "as": "data_type" },
     { "calculate": "datum.revenue_bn * datum.profit_margin_pct / 100", "as": "profit_bn" },
     { "calculate": "datum.revenue_bn - datum.profit_bn",              "as": "expenditure_bn" },
     { "fold": ["profit_bn", "expenditure_bn"], "as": ["zone", "value_bn"] },
     { "calculate": "datum.zone === 'profit_bn' ? 0 : 1", "as": "zone_order" }
   ],
-  "layer": [
-      {
-      "description": "Stacked area: profit (bottom) + expenditure (top)",
-      "mark": { "type": "area", "interpolate": "monotone" },
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": "Year",
-          "axis": { "labelAngle": 0 
-          }
-        },
-        "y": {
-          "field": "value_bn",
-          "type": "quantitative",
-          "stack": "zero",
-          "title": "Annual revenue (AUD billions)",
-          "axis": {
-            "labelExpr": "'$' + format(datum.value, '.1f') + 'B'"
-          }
-        },
-        "color": {
-          "field": "zone",
-          "type": "nominal",
-          "scale": {
-            "domain": ["profit_bn", "expenditure_bn"],
-            "range":  ["#d2f0d1",   "#78746d"]
-          },
-          "legend": null
-        },
-        "order": { "field": "zone_order", "type": "quantitative" },
-        "tooltip": [
-          { "field": "year",              "type": "ordinal",      "title": "Year" },
-          { "field": "revenue_bn",        "type": "quantitative", "title": "Revenue (AUD bn)",     "format": ".2f" },
-          { "field": "profit_margin_pct", "type": "quantitative", "title": "Profit margin (%)",    "format": ".1f" },
-          { "field": "profit_bn",         "type": "quantitative", "title": "Profit (AUD bn)",      "format": ".2f" },
-          { "field": "expenditure_bn",    "type": "quantitative", "title": "Expenditure (AUD bn)", "format": ".2f" }
-        ]
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year (2000s)",
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "'’' + substring('' + datum.value, 2)"
       }
     },
-
+    "y": {
+      "field": "value_bn",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Annual revenue (AUD billions)",
+      "axis": {
+        "labelExpr": "'$' + format(datum.value, '.1f') + 'B'"
+      }
+    },
+    "color": {
+      "field": "zone",
+      "type": "nominal",
+      "scale": {
+        "domain": ["profit_bn", "expenditure_bn"],
+        "range":  ["#d2f0d1",   "#78746d"]
+      },
+      "legend": null
+    },
+    "order": { "field": "zone_order", "type": "quantitative" },
+    "tooltip": [
+      { "field": "year",              "type": "ordinal",      "title": "Year" },
+      { "field": "data_type",         "type": "nominal",      "title": "Data" },
+      { "field": "revenue_bn",        "type": "quantitative", "title": "Revenue (AUD bn)",     "format": "$,.2f" },
+      { "field": "profit_margin_pct", "type": "quantitative", "title": "Profit margin (%)",    "format": "$,.2f" },
+      { "field": "profit_bn",         "type": "quantitative", "title": "Profit (AUD bn)",      "format": "$,.2f" },
+      { "field": "expenditure_bn",    "type": "quantitative", "title": "Expenditure (AUD bn)", "format": "$,.2f" }
+    ]
+  },
+  "layer": [
     {
-      "description": "Profit-threshold line drawn on top of the stack boundary",
+      "description": "Historical (actual) stacked area: profit (bottom) + expenditure (top), full strength",
+      "transform": [ { "filter": "datum.year <= 2026" } ],
+      "mark": { "type": "area", "interpolate": "monotone" }
+    },
+    {
+      "description": "Forecast stacked area (2026 onward), faded to read as predictive. Starts at 2026 so it joins the historical area seamlessly.",
+      "transform": [ { "filter": "datum.year >= 2026" } ],
+      "mark": { "type": "area", "interpolate": "monotone", "fillOpacity": 0.4 }
+    },
+    {
+      "description": "Profit-threshold line over the historical stack boundary",
       "transform": [
-        { "filter": "datum.zone === 'profit_bn'" }
+        { "filter": "datum.zone === 'profit_bn' && datum.year <= 2026" }
       ],
       "mark": { "type": "line", "color": "#363d3c", "strokeWidth": 1.5, "interpolate": "monotone", "strokeCap": "round", "strokeDash": [4,2] },
       "encoding": {
-        "x": { "field": "year",     "type": "ordinal" },
-        "y": { "field": "value_bn", "type": "quantitative" }
+        "color": null,
+        "tooltip": null
       }
     },
-
+    {
+      "description": "Profit-threshold line over the forecast stack boundary, faded",
+      "transform": [
+        { "filter": "datum.zone === 'profit_bn' && datum.year >= 2026" }
+      ],
+      "mark": { "type": "line", "color": "#363d3c", "strokeWidth": 1.5, "opacity": 0.4, "interpolate": "monotone", "strokeCap": "round", "strokeDash": [4,2] },
+      "encoding": {
+        "color": null,
+        "tooltip": null
+      }
+    },
     {
       "description": "Inline label anchored in the upper (expenditure) zone",
       "data": { "values": [ { "year": 2018, "y": 1.45, "label": "Expenditure" } ] },
@@ -92,10 +110,12 @@
       "encoding": {
         "x":    { "field": "year",  "type": "ordinal" },
         "y":    { "field": "y",     "type": "quantitative" },
-        "text": { "field": "label" }
+        "text": { "field": "label" },
+        "color": null,
+        "order": null,
+        "tooltip": null
       }
     },
-
     {
       "description": "Inline label anchored in the lower (profit) zone",
       "data": { "values": [ { "year": 2018, "y": 0.32, "label": "Profit" } ] },
@@ -109,10 +129,32 @@
       "encoding": {
         "x":    { "field": "year",  "type": "ordinal" },
         "y":    { "field": "y",     "type": "quantitative" },
-        "text": { "field": "label" }
+        "text": { "field": "label" },
+        "color": null,
+        "order": null,
+        "tooltip": null
+      }
+    },
+    {
+      "description": "Forecast region label",
+      "data": { "values": [ { "year": 2029, "y": 3.25, "label": "Forecast" } ] },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#363d3c",
+        "opacity": 0.6
+      },
+      "encoding": {
+        "x":    { "field": "year",  "type": "ordinal" },
+        "y":    { "field": "y",     "type": "quantitative" },
+        "text": { "field": "label" },
+        "color": null,
+        "order": null,
+        "tooltip": null
       }
     }
-
   ],
   "config": {
     "view":  { "stroke": null },

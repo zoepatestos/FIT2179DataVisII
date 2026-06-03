@@ -77,14 +77,18 @@
           }
         },
         {
-          "filter": "datum.value_usd != null && datum.value_usd > 0"
+          "calculate": "datum.value_usd * 1.43",
+          "as": "value_aud"
         },
         {
-          "joinaggregate": [{"op": "sum", "field": "value_usd", "as": "total_imports"}],
+          "filter": "datum.value_aud != null && datum.value_aud > 0"
+        },
+        {
+          "joinaggregate": [{"op": "sum", "field": "value_aud", "as": "total_imports"}],
           "groupby": []
         },
         {
-          "calculate": "datum.value_usd / datum.total_imports",
+          "calculate": "datum.value_aud / datum.total_imports",
           "as": "share_of_imports"
         }
       ],
@@ -100,7 +104,7 @@
           "type": "quantitative",
           "scale": {
             "type": "linear",
-            "scheme": "goldorange",
+            "scheme": "lightorange",
             "domain": [0, 1],
             "clamp": true
           },
@@ -117,7 +121,7 @@
         },
         "tooltip": [
           {"field": "properties.NAME",  "type": "nominal",      "title": "Country"},
-          {"field": "value_usd",        "type": "quantitative", "title": "Export value to AUS(USD)",  "format": "$,.0f"},
+          {"field": "value_aud",        "type": "quantitative", "title": "Export value to AUS",  "format": "$,.0f"},
           {"field": "share_of_imports", "type": "quantitative", "title": "% of global exports to AUS",    "format": ".1%"},
           {"field": "year",             "type": "ordinal",      "title": "Year"},
           {"field": "category",         "type": "nominal",      "title": "Category"}

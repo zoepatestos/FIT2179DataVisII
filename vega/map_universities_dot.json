@@ -40,7 +40,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["University"],
-            "range":  ["#eb1745"]
+            "range":  ["#2cdada"]
           },
           "legend": null
         },
